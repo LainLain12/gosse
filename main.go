@@ -103,15 +103,16 @@ func sseTimeHandler(b *Broker) http.HandlerFunc {
 		for {
 			select {
 			case msg := <-client:
-				// Only show time and client count
+				// Show time and actual client count from broker
 				var timeStr string
-				var clientsStr string
-				n, _ := fmt.Sscanf(msg, "%s | CPU: %*f%% | MEM: %*f%% | clients: %s", &timeStr, &clientsStr)
-				if n == 2 {
-					fmt.Fprintf(w, "data: %s | clients: %s\n\n", timeStr, clientsStr)
+				n, _ := fmt.Sscanf(msg, "%s | CPU: %*f%% | MEM: %*f%% | clients: %*s", &timeStr)
+				b.lock.RLock()
+				clientCount := len(b.clients)
+				b.lock.RUnlock()
+				if n == 1 {
+					fmt.Fprintf(w, "data: %s | clients: %d\n\n", timeStr, clientCount)
 				} else {
-					// fallback: just send the original message
-					fmt.Fprintf(w, "data: %s\n\n", msg)
+					fmt.Fprintf(w, "data: %s | clients: %d\n\n", msg, clientCount)
 				}
 				flusher.Flush()
 			case <-notify:
