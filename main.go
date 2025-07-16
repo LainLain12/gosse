@@ -274,6 +274,6 @@ func main() {
 	http.HandleFunc("/addimage/", gift.AddImageHandler(giftDB))
 	// Serve static images from /images/
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("images"))))
-	log.Println("SSE server started on :8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Println("SSE server started on :4597")
+	log.Fatal(http.ListenAndServe(":4597", nil))
 }
