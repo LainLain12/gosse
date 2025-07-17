@@ -283,6 +283,8 @@ func main() {
 	http.HandleFunc("/threed", threedata.ThreedDataHandler(threedDB))
 	http.HandleFunc("/gift", gift.GiftDataHandler(giftDB))
 	http.HandleFunc("/addimage/", gift.AddImageHandler(giftDB))
+	http.HandleFunc("/livews", Live.LiveWebSocketHandler)
+	go Live.StartLiveWebSocketBroadcast()
 	// Serve static images from /images/
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("images"))))
 	log.Println("SSE server started on :4597")
