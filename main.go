@@ -14,6 +14,7 @@ import (
 	"gosse/twoddata"
 	"log"
 	"net/http"
+	"runtime"
 	"runtime/debug"
 	"sync"
 	"time"
@@ -251,6 +252,13 @@ func main() {
 	defer giftDB.Close()
 
 	broker := NewBroker()
+	/// check go routine count
+	go func() {
+		for {
+			fmt.Println("Goroutines:", runtime.NumGoroutine())
+			time.Sleep(10 * time.Second)
+		}
+	}()
 
 	// Start goroutine to broadcast time/cpu/mem/client count every second
 	go func() {

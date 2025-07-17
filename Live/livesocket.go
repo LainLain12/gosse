@@ -37,6 +37,14 @@ func LiveWebSocketHandler(w http.ResponseWriter, r *http.Request) {
 		conn.Close()
 	}()
 
+	// Set up ping/pong to keep connection alive
+	conn.SetReadLimit(512)
+	conn.SetReadDeadline(time.Now().Add(60 * time.Second))
+	conn.SetPongHandler(func(string) error {
+		conn.SetReadDeadline(time.Now().Add(60 * time.Second))
+		return nil
+	})
+
 	go func() {
 		for {
 			if _, _, err := conn.ReadMessage(); err != nil {
@@ -69,7 +77,8 @@ func StartLiveWebSocketBroadcast() {
 				}
 				data, _ := json.Marshal(broadcast)
 				for conn := range wsClients {
-					conn.SetWriteDeadline(time.Now().Add(10 * time.Second))
+					conn.SetWriteDeadline(time.Now().Add(60 * time.Second))
+					_ = conn.WriteMessage(websocket.PingMessage, []byte{}) // Send ping
 					if err := conn.WriteMessage(websocket.TextMessage, data); err != nil {
 						wsClientsMutex.RUnlock()
 						wsClientsMutex.Lock()
