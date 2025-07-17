@@ -21,7 +21,7 @@ var (
 	wsClientsMutex sync.RWMutex
 )
 
-// LiveWebSocketHandler handles websocket connections and broadcasts liveDataStore updates every second
+// LiveWebSocketHandler handles websocket connections and broadcasts liveDataStore updates only when changed
 func LiveWebSocketHandler(w http.ResponseWriter, r *http.Request) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
@@ -37,7 +37,6 @@ func LiveWebSocketHandler(w http.ResponseWriter, r *http.Request) {
 		conn.Close()
 	}()
 
-	// Reader goroutine (optional, for receiving messages from client)
 	go func() {
 		for {
 			if _, _, err := conn.ReadMessage(); err != nil {
@@ -50,25 +49,41 @@ func LiveWebSocketHandler(w http.ResponseWriter, r *http.Request) {
 	select {}
 }
 
-// BroadcastLiveDataToWebSockets sends the latest liveDataStore to all websocket clients every second
+// StartLiveWebSocketBroadcast broadcasts liveDataStore only when changed, with client count
 func StartLiveWebSocketBroadcast() {
 	go func() {
+		var prevLive string
 		for {
 			time.Sleep(1 * time.Second)
-			wsClientsMutex.RLock()
-			data, _ := json.Marshal(liveDataStore)
-			for conn := range wsClients {
-				conn.SetWriteDeadline(time.Now().Add(10 * time.Second))
-				if err := conn.WriteMessage(websocket.TextMessage, data); err != nil {
-					// Remove dead connection
-					wsClientsMutex.RUnlock()
-					wsClientsMutex.Lock()
-					delete(wsClients, conn)
-					wsClientsMutex.Unlock()
-					wsClientsMutex.RLock()
-				}
+			liveDataMu.Lock()
+			var currLive string
+			if len(liveDataStore) > 0 {
+				currLive = liveDataStore[0].Live // Use your actual field
 			}
-			wsClientsMutex.RUnlock()
+			if currLive != prevLive {
+				wsClientsMutex.RLock()
+				clientCount := len(wsClients)
+				broadcast := map[string]interface{}{
+					"clients": clientCount,
+					"data":    liveDataStore,
+				}
+				data, _ := json.Marshal(broadcast)
+				for conn := range wsClients {
+					conn.SetWriteDeadline(time.Now().Add(10 * time.Second))
+					if err := conn.WriteMessage(websocket.TextMessage, data); err != nil {
+						wsClientsMutex.RUnlock()
+						wsClientsMutex.Lock()
+						delete(wsClients, conn)
+						wsClientsMutex.Unlock()
+						wsClientsMutex.RLock()
+					}
+				}
+				wsClientsMutex.RUnlock()
+				prevLive = currLive
+			}
+			liveDataMu.Unlock()
 		}
 	}()
 }
+
+// LiveDataStore is a placeholder for the actual live data structure
