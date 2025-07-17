@@ -14,6 +14,7 @@ import (
 	"gosse/twoddata"
 	"log"
 	"net/http"
+	"runtime/debug"
 	"sync"
 	"time"
 
@@ -192,31 +193,35 @@ func LiveRoute(broker *Broker) http.HandlerFunc {
 			defer broker.RemoveClient(client)
 
 			notify := w.(http.CloseNotifier).CloseNotify()
-			for {
-				select {
-				case <-time.After(1 * time.Second):
-					cpuPercent, _ := cpu.Percent(0, false)
-					memStat, _ := mem.VirtualMemory()
-					broker.lock.RLock()
-					clientCount := len(broker.clients)
-					broker.lock.RUnlock()
-					msg := fmt.Sprintf("%s | CPU: %.1f%% | MEM: %.1f%% | clients: %d", time.Now().Format(time.RFC3339),
-						func() float64 {
-							if len(cpuPercent) > 0 {
-								return cpuPercent[0]
-							} else {
-								return 0
-							}
-						}(),
-						memStat.UsedPercent,
-						clientCount,
-					)
-					fmt.Fprintf(w, "data: %s\n\n", msg)
-					flusher.Flush()
-				case <-notify:
-					return
+			go func() {
+				for {
+					select {
+					case <-time.After(1 * time.Second):
+						cpuPercent, _ := cpu.Percent(0, false)
+						memStat, _ := mem.VirtualMemory()
+						broker.lock.RLock()
+						clientCount := len(broker.clients)
+						broker.lock.RUnlock()
+						msg := fmt.Sprintf("%s | CPU: %.1f%% | MEM: %.1f%% | clients: %d", time.Now().Format(time.RFC3339),
+							func() float64 {
+								if len(cpuPercent) > 0 {
+									return cpuPercent[0]
+								} else {
+									return 0
+								}
+							}(),
+							memStat.UsedPercent,
+							clientCount,
+						)
+						fmt.Fprintf(w, "data: %s\n\n", msg)
+						flusher.Flush()
+					case <-notify:
+						return
+					}
 				}
-			}
+			}()
+			// Block main handler until client disconnects
+			<-notify
 		} else {
 			w.Header().Set("Content-Type", "text/html")
 			fmt.Fprintf(w, `<html><body><h1>Live Time, CPU, Memory, Clients</h1>
@@ -231,7 +236,12 @@ func LiveRoute(broker *Broker) http.HandlerFunc {
 
 func main() {
 	// Route to show all twoddata rows as JSON
-
+	defer func() {
+		if r := recover(); r != nil {
+			log.Printf("Recovered from panic: %v", r)
+			debug.PrintStack()
+		}
+	}()
 	// Initialize SQLite DB and table
 
 	db := twoddata.InitDB("twoddata.db")
