@@ -14,12 +14,25 @@ import (
 	"gosse/twoddata"
 	"log"
 	"net/http"
+	"os"
 	"runtime"
 	"time"
 )
 
 func main() {
+	// 1. Log File ဖွင့်ခြင်း (သို့မဟုတ် အသစ်ဖန်တီးခြင်း)
+	// Output log to a file named server.log
+	logFile, err := os.OpenFile("server.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Fatalf("Failed to open log file: %v", err)
+	}
+	defer logFile.Close() // Application ပိတ်တဲ့အခါ log file ကို ပိတ်ဖို့ သေချာပါစေ။
 
+	// 2. Go ရဲ့ Default Logger ရဲ့ Output ကို Log File ဆီ ပြောင်းခြင်း
+	log.SetOutput(logFile)
+
+	// Optional: Log message format ကို ချိန်ညှိနိုင်ပါတယ်။ (ဥပမာ - ရက်စွဲ၊ အချိန် နဲ့ log entry file name ထည့်ဖို့)
+	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 	// Route to show all twoddata rows as JSON
 	// defer func() {
 	// 	if r := recover(); r != nil {
