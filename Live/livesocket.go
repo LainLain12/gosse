@@ -2,7 +2,6 @@ package Live
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"sync"
 	"time"
@@ -10,17 +9,62 @@ import (
 	"github.com/gorilla/websocket"
 )
 
+type Client struct {
+	conn *websocket.Conn
+	send chan []byte
+}
+
+type Hub struct {
+	clients    map[*Client]struct{}
+	register   chan *Client
+	unregister chan *Client
+	broadcast  chan []byte
+	mu         sync.RWMutex
+}
+
+var hub = &Hub{
+	clients:    make(map[*Client]struct{}),
+	register:   make(chan *Client),
+	unregister: make(chan *Client),
+	broadcast:  make(chan []byte),
+}
+
+func (h *Hub) run() {
+	for {
+		select {
+		case client := <-h.register:
+			h.mu.Lock()
+			h.clients[client] = struct{}{}
+			h.mu.Unlock()
+		case client := <-h.unregister:
+			h.mu.Lock()
+			if _, ok := h.clients[client]; ok {
+				delete(h.clients, client)
+				close(client.send)
+				client.conn.Close()
+			}
+			h.mu.Unlock()
+		case message := <-h.broadcast:
+			h.mu.RLock()
+			for client := range h.clients {
+				select {
+				case client.send <- message:
+				default:
+					close(client.send)
+					delete(h.clients, client)
+					client.conn.Close()
+				}
+			}
+			h.mu.RUnlock()
+		}
+	}
+}
+
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
 	CheckOrigin:     func(r *http.Request) bool { return true },
 }
-
-// --- WebSocket client management ---
-var (
-	wsClients      = make(map[*websocket.Conn]struct{})
-	wsClientsMutex sync.RWMutex
-)
 
 // LiveWebSocketHandler handles websocket connections and broadcasts liveDataStore updates only when changed
 func LiveWebSocketHandler(w http.ResponseWriter, r *http.Request) {
@@ -28,44 +72,45 @@ func LiveWebSocketHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	wsClientsMutex.Lock()
-	wsClients[conn] = struct{}{}
-	fmt.Println("connect new client:", len(wsClients))
-	wsClientsMutex.Unlock()
+	client := &Client{
+		conn: conn,
+		send: make(chan []byte, 256),
+	}
+	hub.register <- client
+
+	go client.writePump()
+	client.readPump()
+}
+
+func (c *Client) readPump() {
 	defer func() {
-		wsClientsMutex.Lock()
-		delete(wsClients, conn)
-		fmt.Println("WebSocket client disconnected")
-
-		wsClientsMutex.Unlock()
-		conn.Close()
+		hub.unregister <- c
 	}()
-
-	// Set up ping/pong to keep connection alive
-	conn.SetReadLimit(512)
-	conn.SetReadDeadline(time.Now().Add(60 * time.Second))
-	conn.SetPongHandler(func(string) error {
-		conn.SetReadDeadline(time.Now().Add(60 * time.Second))
+	c.conn.SetReadLimit(512)
+	c.conn.SetReadDeadline(time.Now().Add(60 * time.Second))
+	c.conn.SetPongHandler(func(string) error {
+		c.conn.SetReadDeadline(time.Now().Add(60 * time.Second))
 		return nil
 	})
-
-	disconnect := make(chan struct{})
-
-	go func() {
-		for {
-			if _, _, err := conn.ReadMessage(); err != nil {
-				close(disconnect)
-				return
-			}
+	for {
+		if _, _, err := c.conn.ReadMessage(); err != nil {
+			break
 		}
-	}()
+	}
+}
 
-	// Wait for disconnect signal
-	<-disconnect
+func (c *Client) writePump() {
+	for msg := range c.send {
+		c.conn.SetWriteDeadline(time.Now().Add(60 * time.Second))
+		if err := c.conn.WriteMessage(websocket.TextMessage, msg); err != nil {
+			break
+		}
+	}
 }
 
 // StartLiveWebSocketBroadcast broadcasts liveDataStore only when changed, with client count
 func StartLiveWebSocketBroadcast() {
+	go hub.run()
 	go func() {
 		var prevLive string
 		for {
@@ -76,25 +121,15 @@ func StartLiveWebSocketBroadcast() {
 				currLive = liveDataStore[0].Live // Use your actual field
 			}
 			if currLive != prevLive {
-				wsClientsMutex.RLock()
-				clientCount := len(wsClients)
+				hub.mu.RLock()
+				clientCount := len(hub.clients)
 				broadcast := map[string]interface{}{
 					"clients": clientCount,
 					"data":    liveDataStore,
 				}
 				data, _ := json.Marshal(broadcast)
-				for conn := range wsClients {
-					conn.SetWriteDeadline(time.Now().Add(60 * time.Second))
-					_ = conn.WriteMessage(websocket.PingMessage, []byte{}) // Send ping
-					if err := conn.WriteMessage(websocket.TextMessage, data); err != nil {
-						wsClientsMutex.RUnlock()
-						wsClientsMutex.Lock()
-						delete(wsClients, conn)
-						wsClientsMutex.Unlock()
-						wsClientsMutex.RLock()
-					}
-				}
-				wsClientsMutex.RUnlock()
+				hub.broadcast <- data
+				hub.mu.RUnlock()
 				prevLive = currLive
 			}
 			liveDataMu.Unlock()
