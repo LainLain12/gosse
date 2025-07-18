@@ -15,7 +15,6 @@ import (
 	"log"
 	"net/http"
 	"runtime"
-	"runtime/debug"
 	"sync"
 	"time"
 
@@ -237,12 +236,12 @@ func LiveRoute(broker *Broker) http.HandlerFunc {
 
 func main() {
 	// Route to show all twoddata rows as JSON
-	defer func() {
-		if r := recover(); r != nil {
-			log.Printf("Recovered from panic: %v", r)
-			debug.PrintStack()
-		}
-	}()
+	// defer func() {
+	// 	if r := recover(); r != nil {
+	// 		log.Printf("Recovered from panic: %v", r)
+	// 		debug.PrintStack()
+	// 	}
+	// }()
 	// Initialize SQLite DB and table
 
 	db := twoddata.InitDB("twoddata.db")
@@ -282,7 +281,7 @@ func main() {
 
 	http.HandleFunc("/events", sseHandler(broker))
 	http.HandleFunc("/time", sseTimeHandler(broker))
-	http.HandleFunc("/", CpuinfoRoute)
+	http.HandleFunc("/", Live.LiveDataSSEHandler)
 	http.HandleFunc("/timecpu", LiveRoute(broker))
 	http.HandleFunc("/history", Live.TwoddataHandler(db))
 	http.HandleFunc("/addlive", Live.AddLiveDataHandler)
@@ -292,9 +291,9 @@ func main() {
 	http.HandleFunc("/gift", gift.GiftDataHandler(giftDB))
 	http.HandleFunc("/addimage/", gift.AddImageHandler(giftDB))
 	http.HandleFunc("/livews", Live.LiveWebSocketHandler)
-	go Live.StartLiveWebSocketBroadcast()
+	Live.StartLiveWebSocketBroadcast()
 	// Serve static images from /images/
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("images"))))
 	log.Println("SSE server started on :4597")
-	log.Fatal(http.ListenAndServe(":4597", nil))
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }

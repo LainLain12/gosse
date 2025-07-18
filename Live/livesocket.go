@@ -2,6 +2,7 @@ package Live
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"sync"
 	"time"
@@ -29,10 +30,13 @@ func LiveWebSocketHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	wsClientsMutex.Lock()
 	wsClients[conn] = struct{}{}
+	fmt.Println("connect new client:", len(wsClients))
 	wsClientsMutex.Unlock()
 	defer func() {
 		wsClientsMutex.Lock()
 		delete(wsClients, conn)
+		fmt.Println("WebSocket client disconnected")
+
 		wsClientsMutex.Unlock()
 		conn.Close()
 	}()
@@ -45,16 +49,19 @@ func LiveWebSocketHandler(w http.ResponseWriter, r *http.Request) {
 		return nil
 	})
 
+	disconnect := make(chan struct{})
+
 	go func() {
 		for {
 			if _, _, err := conn.ReadMessage(); err != nil {
+				close(disconnect)
 				return
 			}
 		}
 	}()
 
-	// Block main handler until disconnect
-	select {}
+	// Wait for disconnect signal
+	<-disconnect
 }
 
 // StartLiveWebSocketBroadcast broadcasts liveDataStore only when changed, with client count

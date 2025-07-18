@@ -21,33 +21,38 @@ func LiveDataSSEHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	notify := w.(http.CloseNotifier).CloseNotify()
-	go func() {
-		var prevLive string
-		for {
-			select {
-			case <-time.After(1 * time.Second):
-				liveDataMu.Lock()
-				var currLive string
-				if len(liveDataStore) > 0 {
-					currLive = liveDataStore[0].Live
-				}
-				if currLive != prevLive {
-					data, _ := json.Marshal(liveDataStore)
-					w.Write([]byte("data: "))
-					w.Write(data)
-					w.Write([]byte("\n\n"))
-					flusher.Flush()
-					prevLive = currLive
-				}
-				liveDataMu.Unlock()
-			case <-notify:
-				return
+	ctx := r.Context()
+	var prevLive string
+	for {
+		select {
+		case <-time.After(1 * time.Second):
+			liveDataMu.Lock()
+			var currLive string
+			if len(liveDataStore) > 0 {
+				currLive = liveDataStore[0].Live
 			}
+			if currLive != prevLive {
+				data, _ := json.Marshal(liveDataStore)
+				if _, err := w.Write([]byte("data: ")); err != nil {
+					liveDataMu.Unlock()
+					return
+				}
+				if _, err := w.Write(data); err != nil {
+					liveDataMu.Unlock()
+					return
+				}
+				if _, err := w.Write([]byte("\n\n")); err != nil {
+					liveDataMu.Unlock()
+					return
+				}
+				flusher.Flush()
+				prevLive = currLive
+			}
+			liveDataMu.Unlock()
+		case <-ctx.Done():
+			return
 		}
-	}()
-	// Block main handler until client disconnects
-	<-notify
+	}
 }
 
 // LiveDataPageHandler serves an HTML page that shows the live JSON data
