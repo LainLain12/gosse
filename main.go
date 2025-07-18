@@ -295,5 +295,5 @@ func main() {
 	// Serve static images from /images/
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("images"))))
 	log.Println("SSE server started on :4597")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":4597", nil))
 }
