@@ -1,140 +1,105 @@
 package Live
 
-import (
-	"encoding/json"
-	"net/http"
-	"sync"
-	"time"
+// import (
+// 	"encoding/json"
+// 	"fmt"
+// 	"net/http"
+// 	"sync"
+// 	"time"
 
-	"github.com/gorilla/websocket"
-)
+// 	"github.com/gorilla/websocket"
+// )
 
-type Client struct {
-	conn *websocket.Conn
-	send chan []byte
-}
+// var upgrader = websocket.Upgrader{
+// 	ReadBufferSize:  1024,
+// 	WriteBufferSize: 1024,
+// 	CheckOrigin:     func(r *http.Request) bool { return true },
+// }
 
-type Hub struct {
-	clients    map[*Client]struct{}
-	register   chan *Client
-	unregister chan *Client
-	broadcast  chan []byte
-	mu         sync.RWMutex
-}
+// // --- WebSocket client management ---
+// var (
+// 	wsClients      = make(map[*websocket.Conn]struct{})
+// 	wsClientsMutex sync.RWMutex
+// )
 
-var hub = &Hub{
-	clients:    make(map[*Client]struct{}),
-	register:   make(chan *Client),
-	unregister: make(chan *Client),
-	broadcast:  make(chan []byte),
-}
+// // LiveWebSocketHandler handles websocket connections and broadcasts liveDataStore updates only when changed
+// func LiveWebSocketHandler(w http.ResponseWriter, r *http.Request) {
+// 	conn, err := upgrader.Upgrade(w, r, nil)
+// 	if err != nil {
+// 		return
+// 	}
+// 	wsClientsMutex.Lock()
+// 	wsClients[conn] = struct{}{}
+// 	fmt.Println("connect new client:", len(wsClients))
+// 	wsClientsMutex.Unlock()
+// 	defer func() {
+// 		wsClientsMutex.Lock()
+// 		delete(wsClients, conn)
+// 		fmt.Println("WebSocket client disconnected")
 
-func (h *Hub) run() {
-	for {
-		select {
-		case client := <-h.register:
-			h.mu.Lock()
-			h.clients[client] = struct{}{}
-			h.mu.Unlock()
-		case client := <-h.unregister:
-			h.mu.Lock()
-			if _, ok := h.clients[client]; ok {
-				delete(h.clients, client)
-				close(client.send)
-				client.conn.Close()
-			}
-			h.mu.Unlock()
-		case message := <-h.broadcast:
-			h.mu.RLock()
-			for client := range h.clients {
-				select {
-				case client.send <- message:
-				default:
-					close(client.send)
-					delete(h.clients, client)
-					client.conn.Close()
-				}
-			}
-			h.mu.RUnlock()
-		}
-	}
-}
+// 		wsClientsMutex.Unlock()
+// 		conn.Close()
+// 	}()
 
-var upgrader = websocket.Upgrader{
-	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
-	CheckOrigin:     func(r *http.Request) bool { return true },
-}
+// 	// Set up ping/pong to keep connection alive
+// 	conn.SetReadLimit(512)
+// 	conn.SetReadDeadline(time.Now().Add(60 * time.Second))
+// 	conn.SetPongHandler(func(string) error {
+// 		conn.SetReadDeadline(time.Now().Add(60 * time.Second))
+// 		return nil
+// 	})
 
-// LiveWebSocketHandler handles websocket connections and broadcasts liveDataStore updates only when changed
-func LiveWebSocketHandler(w http.ResponseWriter, r *http.Request) {
-	conn, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {
-		return
-	}
-	client := &Client{
-		conn: conn,
-		send: make(chan []byte, 256),
-	}
-	hub.register <- client
+// 	disconnect := make(chan struct{})
 
-	go client.writePump()
-	client.readPump()
-}
+// 	go func() {
+// 		for {
+// 			if _, _, err := conn.ReadMessage(); err != nil {
+// 				close(disconnect)
+// 				return
+// 			}
+// 		}
+// 	}()
 
-func (c *Client) readPump() {
-	defer func() {
-		hub.unregister <- c
-	}()
-	c.conn.SetReadLimit(512)
-	c.conn.SetReadDeadline(time.Now().Add(60 * time.Second))
-	c.conn.SetPongHandler(func(string) error {
-		c.conn.SetReadDeadline(time.Now().Add(60 * time.Second))
-		return nil
-	})
-	for {
-		if _, _, err := c.conn.ReadMessage(); err != nil {
-			break
-		}
-	}
-}
+// 	// Wait for disconnect signal
+// 	<-disconnect
+// }
 
-func (c *Client) writePump() {
-	for msg := range c.send {
-		c.conn.SetWriteDeadline(time.Now().Add(60 * time.Second))
-		if err := c.conn.WriteMessage(websocket.TextMessage, msg); err != nil {
-			break
-		}
-	}
-}
+// // StartLiveWebSocketBroadcast broadcasts liveDataStore only when changed, with client count
+// func StartLiveWebSocketBroadcast() {
+// 	go func() {
+// 		var prevLive string
+// 		for {
+// 			time.Sleep(1 * time.Second)
+// 			liveDataMu.Lock()
+// 			var currLive string
+// 			if len(liveDataStore) > 0 {
+// 				currLive = liveDataStore[0].Live // Use your actual field
+// 			}
+// 			if currLive != prevLive {
+// 				wsClientsMutex.RLock()
+// 				clientCount := len(wsClients)
+// 				broadcast := map[string]interface{}{
+// 					"clients": clientCount,
+// 					"data":    liveDataStore,
+// 				}
+// 				data, _ := json.Marshal(broadcast)
+// 				for conn := range wsClients {
+// 					conn.SetWriteDeadline(time.Now().Add(60 * time.Second))
+// 					_ = conn.WriteMessage(websocket.PingMessage, []byte{}) // Send ping
+// 					if err := conn.WriteMessage(websocket.TextMessage, data); err != nil {
+// 						wsClientsMutex.RUnlock()
+// 						wsClientsMutex.Lock()
+// 						delete(wsClients, conn)
+// 						wsClientsMutex.Unlock()
+// 						wsClientsMutex.RLock()
+// 					}
+// 				}
+// 				wsClientsMutex.RUnlock()
+// 				prevLive = currLive
+// 			}
+// 			liveDataMu.Unlock()
+// 		}
+// 	}()
+// }
 
-// StartLiveWebSocketBroadcast broadcasts liveDataStore only when changed, with client count
-func StartLiveWebSocketBroadcast() {
-	go hub.run()
-	go func() {
-		var prevLive string
-		for {
-			time.Sleep(1 * time.Second)
-			liveDataMu.Lock()
-			var currLive string
-			if len(liveDataStore) > 0 {
-				currLive = liveDataStore[0].Live // Use your actual field
-			}
-			if currLive != prevLive {
-				hub.mu.RLock()
-				clientCount := len(hub.clients)
-				broadcast := map[string]interface{}{
-					"clients": clientCount,
-					"data":    liveDataStore,
-				}
-				data, _ := json.Marshal(broadcast)
-				hub.broadcast <- data
-				hub.mu.RUnlock()
-				prevLive = currLive
-			}
-			liveDataMu.Unlock()
-		}
-	}()
-}
-
-// LiveDataStore is a placeholder for the actual live data structure
+// // LiveDataStore is a placeholder for the actual live data structure
