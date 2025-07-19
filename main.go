@@ -71,6 +71,7 @@ func main() {
 	http.HandleFunc("/threed", threedata.ThreedDataHandler(threedDB))
 	http.HandleFunc("/gift", gift.GiftDataHandler(giftDB))
 	http.HandleFunc("/addimage/", gift.AddImageHandler(giftDB))
+	http.HandleFunc("/gemini", Live.GeminiPageHandler)
 
 	// --- WebSocket Broker Setup (NEW) ---
 	wsBroker := Live.NewWebSocketBroker()             // Initialize the new WebSocket broker

@@ -3,9 +3,19 @@ package Live
 import (
 	"encoding/json"
 	"net/http"
+	"sync"
 	"time"
 )
 
+type api struct {
+	Data        interface{} `json:"data"`
+	ClientCount int         `json:"clinetcount"`
+}
+
+var Clinets []string
+var clientsMu sync.Mutex
+
+// Global slice to hold all connected SSE clients
 // In-memory live data store and mutex
 
 // LiveDataSSEHandler streams the current liveDataStore as JSON every second
@@ -22,6 +32,10 @@ func LiveDataSSEHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ctx := r.Context()
+	clientsMu.Lock()
+	Clinets = append(Clinets, r.RemoteAddr)
+	clientsMu.Unlock()
+
 	var prevLive string
 	for {
 		select {
@@ -32,7 +46,11 @@ func LiveDataSSEHandler(w http.ResponseWriter, r *http.Request) {
 				currLive = liveDataStore[0].Live
 			}
 			if currLive != prevLive {
-				data, _ := json.Marshal(liveDataStore)
+				// Convert to JSON
+				var ap api
+				ap.Data = liveDataStore
+				ap.ClientCount = len(Clinets)
+				data, _ := json.Marshal(ap)
 				if _, err := w.Write([]byte("data: ")); err != nil {
 					liveDataMu.Unlock()
 					return
