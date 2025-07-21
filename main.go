@@ -7,7 +7,6 @@
 package main
 
 import (
-	"fmt"
 	"gosse/Live"
 	"gosse/gift"
 	"gosse/threedata"
@@ -51,7 +50,7 @@ func main() {
 	/// check go routine count
 	go func() {
 		for {
-			fmt.Println("Goroutines:", runtime.NumGoroutine())
+			log.Println("Goroutines:", runtime.NumGoroutine())
 			time.Sleep(10 * time.Second)
 		}
 	}()
