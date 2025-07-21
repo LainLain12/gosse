@@ -47,7 +47,7 @@ func (b *Broker) Start() {
 				b.totalClients++
 				b.mu.Unlock()
 				log.Printf("New client connected. Total clients: %d", b.totalClients)
-				fmt.Println("newclients", b.totalClients)
+				log.Printf("newclients", b.totalClients)
 
 			case s := <-b.closedClients:
 				// A client has disconnected
@@ -145,7 +145,7 @@ func (b *Broker) StartBroadcastingTime() {
 			b.broadcaster <- string(message) // Send message to the broker for broadcasting
 		case <-time.After(1 * time.Minute): // Example: Periodically check if clients exist
 			if b.totalClients == 0 {
-				log.Println("No active clients. Consider pausing broadcasts to save CPU.")
+				log.Printf("No active clients. Consider pausing broadcasts to save CPU.")
 				// In a real application, you might stop this goroutine or reduce frequency
 				// if there are no active listeners to save resources.
 			}
