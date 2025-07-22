@@ -7,6 +7,7 @@
 package main
 
 import (
+	"fmt"
 	"gosse/Live"
 	"gosse/gift"
 	"gosse/threedata"
@@ -34,6 +35,8 @@ func main() {
 	// Optional: Log message format ကို ချိန်ညှိနိုင်ပါတယ်။ (ဥပမာ - ရက်စွဲ၊ အချိန် နဲ့ log entry file name ထည့်ဖို့)
 	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 	// Route to show all twoddata rows as JSON
+
+	//Recovery From Panic
 	defer func() {
 		if r := recover(); r != nil {
 			log.Printf("Recovered from panic: %v", r)
@@ -81,6 +84,6 @@ func main() {
 
 	// Serve static images from /images/
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("images"))))
-	log.Println("SSE server started on :4597")
-	log.Fatal(http.ListenAndServe(":4597", nil))
+	log.Println("SSE server started on :1411")
+	fmt.Println(http.ListenAndServe(":1411", nil))
 }
