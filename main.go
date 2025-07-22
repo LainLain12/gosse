@@ -15,6 +15,7 @@ import (
 	"net/http"
 	"os"
 	"runtime"
+	"runtime/debug"
 	"time"
 )
 
@@ -33,12 +34,12 @@ func main() {
 	// Optional: Log message format ကို ချိန်ညှိနိုင်ပါတယ်။ (ဥပမာ - ရက်စွဲ၊ အချိန် နဲ့ log entry file name ထည့်ဖို့)
 	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 	// Route to show all twoddata rows as JSON
-	// defer func() {
-	// 	if r := recover(); r != nil {
-	// 		log.Printf("Recovered from panic: %v", r)
-	// 		debug.PrintStack()
-	// 	}
-	// }()
+	defer func() {
+		if r := recover(); r != nil {
+			log.Printf("Recovered from panic: %v", r)
+			debug.PrintStack()
+		}
+	}()
 	// Initialize SQLite DB and table
 
 	db := twoddata.InitDB("twoddata.db")

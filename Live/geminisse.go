@@ -1,6 +1,7 @@
 package Live
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -47,7 +48,7 @@ func (b *Broker) Start() {
 				b.totalClients++
 				b.mu.Unlock()
 				log.Printf("New client connected. Total clients: %d", b.totalClients)
-				log.Printf("newclients", b.totalClients)
+				log.Printf("newclients: %d", b.totalClients)
 
 			case s := <-b.closedClients:
 				// A client has disconnected
@@ -119,7 +120,7 @@ func (b *Broker) SSEHandler(w http.ResponseWriter, r *http.Request) {
 		select {
 		case msg := <-client.MessageChannel:
 			// Format and send the SSE message
-			fmt.Fprintf(w, "data: %s %d\n\n", msg, b.totalClients)
+			fmt.Fprintf(w, "data: %s \n", msg)
 			flusher.Flush() // Flush the data to the client immediately
 		case <-client.Done:
 			// Client was explicitly marked as done by the broker (e.g., due to disconnect)
@@ -137,12 +138,10 @@ func (b *Broker) StartBroadcastingTime() {
 	for {
 		select {
 		case <-ticker.C:
-			currentTime := time.Now().Format(time.RFC3339)
-			message := fmt.Sprintf("Current time: %s", currentTime)
 
-			//	data, _ := json.Marshal(liveDataStore)
+			data, _ := json.Marshal(liveDataStore)
 
-			b.broadcaster <- string(message) // Send message to the broker for broadcasting
+			b.broadcaster <- string(data) // Send message to the broker for broadcasting
 		case <-time.After(1 * time.Minute): // Example: Periodically check if clients exist
 			if b.totalClients == 0 {
 				log.Printf("No active clients. Consider pausing broadcasts to save CPU.")
