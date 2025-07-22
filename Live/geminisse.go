@@ -86,6 +86,7 @@ func (b *Broker) Start() {
 func (b *Broker) SSEHandler(w http.ResponseWriter, r *http.Request) {
 	// Set necessary headers for SSE
 	w.Header().Set("Content-Type", "text/event-stream")
+	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Cache-Control", "no-cache")
 	w.Header().Set("Connection", "keep-alive")
 	w.Header().Set("Access-Control-Allow-Origin", "*") // For CORS
@@ -119,9 +120,7 @@ func (b *Broker) SSEHandler(w http.ResponseWriter, r *http.Request) {
 		select {
 		case msg := <-client.MessageChannel:
 			// Format and send the SSE message
-			data := make(map[string]string)
-			data["data"] = msg
-			json.NewEncoder(w).Encode(data)
+			w.Write([]byte(msg))
 			flusher.Flush() // Flush the data to the client immediately
 		case <-client.Done:
 			// Client was explicitly marked as done by the broker (e.g., due to disconnect)
