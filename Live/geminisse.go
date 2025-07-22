@@ -121,7 +121,7 @@ func (b *Broker) SSEHandler(w http.ResponseWriter, r *http.Request) {
 		select {
 		case msg := <-client.MessageChannel:
 			// Format and send the SSE message
-			fmt.Fprintf(w, "%s", msg)
+			fmt.Fprintf(w, "%s \n", msg)
 			flusher.Flush() // Flush the data to the client immediately
 		case <-client.Done:
 			// Client was explicitly marked as done by the broker (e.g., due to disconnect)
