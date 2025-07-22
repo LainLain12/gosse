@@ -66,14 +66,13 @@ func main() {
 	go brokerr.StartBroadcastingTime()
 
 	http.HandleFunc("/", brokerr.SSEHandler)
-	http.HandleFunc("/ppp", Live.LiveDataSSEHandler)
 	http.HandleFunc("/history", Live.TwoddataHandler(db))
 	http.HandleFunc("/addlive", Live.AddLiveDataHandler)
 	http.HandleFunc("/live", Live.LiveDataPageHandler)
 	http.HandleFunc("/livedata/sse", Live.LiveDataSSEHandler)
 	http.HandleFunc("/threed", threedata.ThreedDataHandler(threedDB))
 	http.HandleFunc("/gift", gift.GiftDataHandler(giftDB))
-	http.HandleFunc("/addimage/", gift.AddImageHandler(giftDB))
+	http.HandleFunc("/addgift/", gift.AddGiftHandler(giftDB))
 	http.HandleFunc("/gemini", Live.GeminiPageHandler)
 
 	// --- WebSocket Broker Setup (NEW) ---

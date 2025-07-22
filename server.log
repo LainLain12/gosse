@@ -23876,3 +23876,12 @@
 2025/07/22 21:47:31 main.go:53: Goroutines: 9
 2025/07/22 21:47:41 main.go:53: Goroutines: 9
 2025/07/22 21:47:51 main.go:53: Goroutines: 9
+2025/07/22 22:50:25 main.go:42: Recovered from panic: pattern "/gift/images/" (registered at C:/Users/Admin/Desktop/gosse/main.go:86) conflicts with pattern "/gift/images/" (registered at C:/Users/Admin/Desktop/gosse/main.go:85):
+/gift/images/ matches the same requests as /gift/images/
+2025/07/22 22:50:25 main.go:57: Goroutines: 6
+2025/07/22 22:51:35 main.go:57: Goroutines: 5
+2025/07/22 22:51:35 main.go:86: SSE server started on :1411
+2025/07/22 22:51:45 main.go:57: Goroutines: 9
+2025/07/22 22:51:55 main.go:57: Goroutines: 9
+2025/07/22 22:51:55 geminisse.go:49: New client connected. Total clients: 1
+2025/07/22 22:51:55 geminisse.go:50: newclients: 1

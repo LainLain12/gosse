@@ -35,7 +35,7 @@ func GiftDataHandler(db *sql.DB) http.HandlerFunc {
 }
 
 // AddImageHandler handles POST /addimage to upload an image to the images folder
-func AddImageHandler(db *sql.DB) http.HandlerFunc {
+func AddGiftHandler(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		defer func() {
 			if rec := recover(); rec != nil {
@@ -73,7 +73,7 @@ func AddImageHandler(db *sql.DB) http.HandlerFunc {
 		}
 
 		fname := fmt.Sprintf("%f%s", float64(time.Now().UnixNano())/1e9, ext)
-		fpath := "images/" + fname
+		fpath := "gift/images/" + fname
 		out, err := os.Create(fpath)
 		if err != nil {
 			http.Error(w, "Failed to save image: "+err.Error(), http.StatusInternalServerError)
@@ -92,7 +92,7 @@ func AddImageHandler(db *sql.DB) http.HandlerFunc {
 			id = fmt.Sprintf("%d", time.Now().UnixNano())
 		}
 		name := fname
-		relUrl := "/images/" + fname
+		relUrl := "/gift/images/" + fname
 		scheme := "http"
 		host := r.Host
 		fullUrl := scheme + "://" + host + relUrl
@@ -128,7 +128,7 @@ func AddImageHandler(db *sql.DB) http.HandlerFunc {
 
 		// Delete old file if needed
 		if oldFilename != "" && oldFilename != fname {
-			oldPath := "images/" + oldFilename
+			oldPath := "/gift/images/" + oldFilename
 			_ = os.Remove(oldPath)
 		}
 
@@ -146,5 +146,5 @@ func AddImageHandler(db *sql.DB) http.HandlerFunc {
 
 // ensureImagesDir creates the images directory if it doesn't exist
 func ensureImagesDir() error {
-	return os.MkdirAll("images", 0755)
+	return os.MkdirAll("gift/images", 0755)
 }

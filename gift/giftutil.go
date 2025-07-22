@@ -9,9 +9,10 @@ import (
 
 // Gift represents a row in the gift table
 type Gift struct {
-	ID   string
-	Name string
-	URL  string
+	ID       string
+	Name     string
+	URL      string
+	Category string // Optional, if you want to categorize gifts
 }
 
 // InitGiftDB creates the 'gift' table if it does not exist
@@ -23,7 +24,8 @@ func InitGiftDB(dbPath string) *sql.DB {
 	createTable := `CREATE TABLE IF NOT EXISTS gift (
         id TEXT PRIMARY KEY,
         name TEXT,
-        url TEXT
+        url TEXT,
+		category TEXT
     );`
 	_, err = db.Exec(createTable)
 	if err != nil {
