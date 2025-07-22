@@ -2,6 +2,7 @@ package Live
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"sync"
@@ -120,7 +121,7 @@ func (b *Broker) SSEHandler(w http.ResponseWriter, r *http.Request) {
 		select {
 		case msg := <-client.MessageChannel:
 			// Format and send the SSE message
-			w.Write([]byte(msg))
+			fmt.Fprintf(w, "%s", msg)
 			flusher.Flush() // Flush the data to the client immediately
 		case <-client.Done:
 			// Client was explicitly marked as done by the broker (e.g., due to disconnect)
