@@ -5,6 +5,7 @@ import (
 	"gosse/twoddata"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 )
@@ -27,6 +28,11 @@ func AddLiveDataHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	liveDataMu.Lock()
 	liveDataStore = []Live{data}
+	jdata, err := json.Marshal(liveDataStore)
+	if err != nil {
+		return
+	}
+	os.WriteFile("live.json", jdata, 0644)
 	liveDataMu.Unlock()
 
 	// --- DB insert logic ---
@@ -44,6 +50,9 @@ func AddLiveDataHandler(w http.ResponseWriter, r *http.Request) {
 			dateStr := now.Format("2006/01/02")
 			err := db.QueryRow("SELECT COUNT(*) FROM twoddata WHERE date = ?", dateStr).Scan(&count)
 			if err == nil && count == 0 {
+				if data.Eresult == "--" {
+					return
+				}
 				// Insert new row
 				_, err := db.Exec(`INSERT INTO twoddata (mset, mvalue, mresult, eset, evalue, eresult, tmodern, tinernet, nmodern, ninternet, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
 					data.Mset, data.Mvalue, data.Mresult, data.Eset, data.Evalue, data.Eresult, data.Tmodern, data.Tinternet, data.Nmodern, data.Ninternet, dateStr)

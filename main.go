@@ -9,6 +9,8 @@ package main
 import (
 	"fmt"
 	"gosse/Live"
+	"gosse/chat"
+	"gosse/futurepaper"
 	"gosse/gift"
 	"gosse/threedata"
 	"gosse/twoddata"
@@ -74,6 +76,10 @@ func main() {
 	http.HandleFunc("/gift", gift.GiftDataHandler(giftDB))
 	http.HandleFunc("/addgift/", gift.AddGiftHandler(giftDB))
 	http.HandleFunc("/gemini", Live.GeminiPageHandler)
+	http.HandleFunc("/getpaper", futurepaper.GetPaperHandler)
+	http.HandleFunc("/futurepaper/getpaper", futurepaper.GetPaperHandler)
+	http.HandleFunc("/chat/sendmessage", chat.SendMessageHandler)
+	http.HandleFunc("/chat/sse", chat.ChatSSEHandler)
 
 	// --- WebSocket Broker Setup (NEW) ---
 	wsBroker := Live.NewWebSocketBroker()             // Initialize the new WebSocket broker
@@ -83,6 +89,8 @@ func main() {
 
 	// Serve static images from /images/
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("images"))))
+	http.Handle("/gift/images/", http.StripPrefix("/gift/images/", http.FileServer(http.Dir("gift/images"))))
+	http.Handle("/futurepaper/images/", http.StripPrefix("/futurepaper/images/", http.FileServer(http.Dir("futurepaper/images"))))
 	log.Println("SSE server started on :1411")
 	fmt.Println(http.ListenAndServe(":1411", nil))
 }
