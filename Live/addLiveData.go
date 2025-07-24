@@ -47,7 +47,7 @@ func AddLiveDataHandler(w http.ResponseWriter, r *http.Request) {
 			defer db.Close()
 			// Check if today's data exists
 			var count int
-			dateStr := now.Format("2006/01/02")
+			dateStr := time.Now().Format("2006/01/02")
 			err := db.QueryRow("SELECT COUNT(*) FROM twoddata WHERE date = ?", dateStr).Scan(&count)
 			if err == nil && count == 0 {
 				if data.Eresult == "--" {
