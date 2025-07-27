@@ -30339,3 +30339,514 @@
 2025/07/28 00:08:15 main.go:70: Goroutines: 9
 2025/07/28 00:08:25 main.go:70: Goroutines: 9
 2025/07/28 00:08:35 main.go:70: Goroutines: 9
+2025/07/28 00:47:28 main.go:73: Goroutines: 5
+2025/07/28 00:47:28 main.go:115: SSE server started on :1411
+2025/07/28 00:47:38 main.go:73: Goroutines: 9
+2025/07/28 00:47:48 main.go:73: Goroutines: 9
+2025/07/28 00:47:58 main.go:73: Goroutines: 9
+2025/07/28 00:48:08 main.go:73: Goroutines: 9
+2025/07/28 00:48:18 main.go:73: Goroutines: 9
+2025/07/28 00:48:28 main.go:73: Goroutines: 9
+2025/07/28 00:48:38 main.go:73: Goroutines: 9
+2025/07/28 00:48:48 main.go:73: Goroutines: 9
+2025/07/28 00:48:58 main.go:73: Goroutines: 9
+2025/07/28 00:49:08 main.go:73: Goroutines: 9
+2025/07/28 00:49:18 main.go:73: Goroutines: 9
+2025/07/28 00:49:28 main.go:73: Goroutines: 9
+2025/07/28 00:49:38 main.go:73: Goroutines: 9
+2025/07/28 00:49:48 main.go:73: Goroutines: 9
+2025/07/28 00:49:58 main.go:73: Goroutines: 9
+2025/07/28 00:50:08 main.go:73: Goroutines: 9
+2025/07/28 00:50:18 main.go:73: Goroutines: 9
+2025/07/28 00:50:28 main.go:73: Goroutines: 10
+2025/07/28 00:50:38 main.go:73: Goroutines: 10
+2025/07/28 00:50:48 main.go:73: Goroutines: 10
+2025/07/28 00:50:52 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 00:50:52 geminisse.go:51: newclients: 1
+2025/07/28 00:50:58 main.go:73: Goroutines: 14
+2025/07/28 00:51:08 main.go:73: Goroutines: 14
+2025/07/28 00:51:18 main.go:73: Goroutines: 14
+2025/07/28 00:51:28 main.go:73: Goroutines: 14
+2025/07/28 00:51:38 main.go:73: Goroutines: 14
+2025/07/28 00:51:48 main.go:73: Goroutines: 14
+2025/07/28 00:51:58 main.go:73: Goroutines: 13
+2025/07/28 00:52:08 main.go:73: Goroutines: 13
+2025/07/28 00:52:18 main.go:73: Goroutines: 13
+2025/07/28 00:52:28 main.go:73: Goroutines: 13
+2025/07/28 00:52:38 main.go:73: Goroutines: 13
+2025/07/28 00:52:48 main.go:73: Goroutines: 13
+2025/07/28 00:52:58 main.go:73: Goroutines: 13
+2025/07/28 00:53:08 main.go:73: Goroutines: 13
+2025/07/28 00:53:18 main.go:73: Goroutines: 13
+2025/07/28 00:53:28 main.go:73: Goroutines: 13
+2025/07/28 00:53:38 main.go:73: Goroutines: 13
+2025/07/28 00:53:48 main.go:73: Goroutines: 12
+2025/07/28 00:53:58 main.go:73: Goroutines: 12
+2025/07/28 00:54:08 main.go:73: Goroutines: 12
+2025/07/28 00:54:18 main.go:73: Goroutines: 12
+2025/07/28 00:54:28 main.go:73: Goroutines: 13
+2025/07/28 00:54:38 main.go:73: Goroutines: 13
+2025/07/28 00:54:48 main.go:73: Goroutines: 13
+2025/07/28 00:54:58 main.go:73: Goroutines: 13
+2025/07/28 00:55:08 main.go:73: Goroutines: 13
+2025/07/28 00:55:18 main.go:73: Goroutines: 13
+2025/07/28 00:55:28 main.go:73: Goroutines: 13
+2025/07/28 00:55:38 main.go:73: Goroutines: 13
+2025/07/28 00:55:48 main.go:73: Goroutines: 13
+2025/07/28 00:55:58 main.go:73: Goroutines: 13
+2025/07/28 00:56:07 geminisse.go:115: HTTP context done for client.
+2025/07/28 00:56:07 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 00:56:07 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 00:56:08 main.go:73: Goroutines: 11
+2025/07/28 00:56:09 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 00:56:09 geminisse.go:51: newclients: 1
+2025/07/28 00:56:18 main.go:73: Goroutines: 13
+2025/07/28 00:56:28 main.go:73: Goroutines: 13
+2025/07/28 00:56:38 main.go:73: Goroutines: 13
+2025/07/28 00:56:48 main.go:73: Goroutines: 12
+2025/07/28 00:56:58 main.go:73: Goroutines: 12
+2025/07/28 00:57:08 main.go:73: Goroutines: 12
+2025/07/28 00:57:18 main.go:73: Goroutines: 12
+2025/07/28 00:57:28 main.go:73: Goroutines: 12
+2025/07/28 00:57:38 main.go:73: Goroutines: 12
+2025/07/28 00:57:48 main.go:73: Goroutines: 12
+2025/07/28 00:57:58 main.go:73: Goroutines: 12
+2025/07/28 00:58:08 main.go:73: Goroutines: 12
+2025/07/28 00:58:18 main.go:73: Goroutines: 12
+2025/07/28 00:58:28 main.go:73: Goroutines: 12
+2025/07/28 00:58:38 main.go:73: Goroutines: 13
+2025/07/28 00:58:48 main.go:73: Goroutines: 13
+2025/07/28 00:58:58 main.go:73: Goroutines: 13
+2025/07/28 00:59:08 main.go:73: Goroutines: 13
+2025/07/28 00:59:18 main.go:73: Goroutines: 13
+2025/07/28 00:59:28 main.go:73: Goroutines: 13
+2025/07/28 00:59:38 main.go:73: Goroutines: 13
+2025/07/28 00:59:40 geminisse.go:115: HTTP context done for client.
+2025/07/28 00:59:40 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 00:59:40 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 00:59:41 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 00:59:41 geminisse.go:51: newclients: 1
+2025/07/28 00:59:48 main.go:73: Goroutines: 13
+2025/07/28 00:59:58 main.go:73: Goroutines: 13
+2025/07/28 01:00:08 main.go:73: Goroutines: 13
+2025/07/28 01:00:18 main.go:73: Goroutines: 13
+2025/07/28 01:00:28 main.go:73: Goroutines: 13
+2025/07/28 01:00:38 main.go:73: Goroutines: 13
+2025/07/28 01:00:48 main.go:73: Goroutines: 13
+2025/07/28 01:00:58 main.go:73: Goroutines: 13
+2025/07/28 01:01:08 main.go:73: Goroutines: 13
+2025/07/28 01:01:18 main.go:73: Goroutines: 13
+2025/07/28 01:01:20 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:01:20 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:01:20 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:01:20 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:01:20 geminisse.go:51: newclients: 1
+2025/07/28 01:01:21 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:01:21 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:01:21 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:01:22 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:01:22 geminisse.go:51: newclients: 1
+2025/07/28 01:01:23 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:01:23 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:01:23 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:01:23 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:01:23 geminisse.go:51: newclients: 1
+2025/07/28 01:01:24 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:01:24 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:01:24 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:01:24 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:01:24 geminisse.go:51: newclients: 1
+2025/07/28 01:01:24 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:01:24 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:01:24 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:01:24 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:01:24 geminisse.go:51: newclients: 1
+2025/07/28 01:01:24 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:01:24 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:01:24 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:01:24 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:01:24 geminisse.go:51: newclients: 1
+2025/07/28 01:01:24 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:01:24 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:01:24 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:01:25 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:01:25 geminisse.go:51: newclients: 1
+2025/07/28 01:01:28 main.go:73: Goroutines: 13
+2025/07/28 01:01:29 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:01:29 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:01:29 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:01:30 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:01:30 geminisse.go:51: newclients: 1
+2025/07/28 01:01:30 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:01:30 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:01:30 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:01:30 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:01:30 geminisse.go:51: newclients: 1
+2025/07/28 01:01:30 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:01:30 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:01:30 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:01:31 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:01:31 geminisse.go:51: newclients: 1
+2025/07/28 01:01:31 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:01:31 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:01:31 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:01:31 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:01:31 geminisse.go:51: newclients: 1
+2025/07/28 01:01:31 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:01:31 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:01:31 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:01:31 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:01:31 geminisse.go:51: newclients: 1
+2025/07/28 01:01:38 main.go:73: Goroutines: 13
+2025/07/28 01:01:48 main.go:73: Goroutines: 13
+2025/07/28 01:01:58 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:01:58 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:01:58 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:01:58 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:01:58 geminisse.go:51: newclients: 1
+2025/07/28 01:01:58 main.go:73: Goroutines: 13
+2025/07/28 01:02:08 main.go:73: Goroutines: 13
+2025/07/28 01:02:18 main.go:73: Goroutines: 13
+2025/07/28 01:02:28 main.go:73: Goroutines: 13
+2025/07/28 01:02:38 main.go:73: Goroutines: 13
+2025/07/28 01:02:48 main.go:73: Goroutines: 13
+2025/07/28 01:02:58 main.go:73: Goroutines: 13
+2025/07/28 01:03:02 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:03:02 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:03:02 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:03:02 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:03:02 geminisse.go:51: newclients: 1
+2025/07/28 01:03:03 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:03:03 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:03:03 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:03:03 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:03:03 geminisse.go:51: newclients: 1
+2025/07/28 01:03:03 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:03:03 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:03:03 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:03:03 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:03:03 geminisse.go:51: newclients: 1
+2025/07/28 01:03:08 main.go:73: Goroutines: 13
+2025/07/28 01:03:18 main.go:73: Goroutines: 13
+2025/07/28 01:03:28 main.go:73: Goroutines: 13
+2025/07/28 01:03:38 main.go:73: Goroutines: 13
+2025/07/28 01:03:43 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:03:43 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:03:43 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:03:43 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:03:43 geminisse.go:51: newclients: 1
+2025/07/28 01:03:44 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:03:44 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:03:44 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:03:44 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:03:44 geminisse.go:51: newclients: 1
+2025/07/28 01:03:44 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:03:44 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:03:44 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:03:44 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:03:44 geminisse.go:51: newclients: 1
+2025/07/28 01:03:44 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:03:44 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:03:44 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:03:44 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:03:44 geminisse.go:51: newclients: 1
+2025/07/28 01:03:44 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:03:44 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:03:44 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:03:44 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:03:44 geminisse.go:51: newclients: 1
+2025/07/28 01:03:45 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:03:45 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:03:45 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:03:45 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:03:45 geminisse.go:51: newclients: 1
+2025/07/28 01:03:45 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:03:45 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:03:45 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:03:45 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:03:45 geminisse.go:51: newclients: 1
+2025/07/28 01:03:45 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:03:45 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:03:45 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:03:45 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:03:45 geminisse.go:51: newclients: 1
+2025/07/28 01:03:45 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:03:45 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:03:45 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:03:45 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:03:45 geminisse.go:51: newclients: 1
+2025/07/28 01:03:45 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:03:45 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:03:45 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:03:46 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:03:46 geminisse.go:51: newclients: 1
+2025/07/28 01:03:46 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:03:46 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:03:46 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:03:46 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:03:46 geminisse.go:51: newclients: 1
+2025/07/28 01:03:46 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:03:46 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:03:46 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:03:46 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:03:46 geminisse.go:51: newclients: 1
+2025/07/28 01:03:46 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:03:46 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:03:46 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:03:46 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:03:46 geminisse.go:51: newclients: 1
+2025/07/28 01:03:48 main.go:73: Goroutines: 13
+2025/07/28 01:03:58 main.go:73: Goroutines: 13
+2025/07/28 01:04:07 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:04:07 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:04:07 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:04:07 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:04:07 geminisse.go:51: newclients: 1
+2025/07/28 01:04:08 main.go:73: Goroutines: 13
+2025/07/28 01:04:18 main.go:73: Goroutines: 13
+2025/07/28 01:04:28 main.go:73: Goroutines: 13
+2025/07/28 01:04:38 main.go:73: Goroutines: 13
+2025/07/28 01:04:48 main.go:73: Goroutines: 13
+2025/07/28 01:04:58 main.go:73: Goroutines: 13
+2025/07/28 01:05:08 main.go:73: Goroutines: 13
+2025/07/28 01:05:18 main.go:73: Goroutines: 13
+2025/07/28 01:05:28 main.go:73: Goroutines: 13
+2025/07/28 01:05:36 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:05:36 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:05:36 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:05:36 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:05:36 geminisse.go:51: newclients: 1
+2025/07/28 01:05:37 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:05:37 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:05:37 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:05:37 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:05:37 geminisse.go:51: newclients: 1
+2025/07/28 01:05:38 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:05:38 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:05:38 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:05:38 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:05:38 geminisse.go:51: newclients: 1
+2025/07/28 01:05:38 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:05:38 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:05:38 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:05:38 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:05:38 geminisse.go:51: newclients: 1
+2025/07/28 01:05:38 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:05:38 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:05:38 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:05:38 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:05:38 geminisse.go:51: newclients: 1
+2025/07/28 01:05:38 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:05:38 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:05:38 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:05:38 main.go:73: Goroutines: 11
+2025/07/28 01:05:38 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:05:38 geminisse.go:51: newclients: 1
+2025/07/28 01:05:39 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:05:39 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:05:39 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:05:39 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:05:39 geminisse.go:51: newclients: 1
+2025/07/28 01:05:39 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:05:39 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:05:39 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:05:39 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:05:39 geminisse.go:51: newclients: 1
+2025/07/28 01:05:39 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:05:39 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:05:39 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:05:39 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:05:39 geminisse.go:51: newclients: 1
+2025/07/28 01:05:39 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:05:39 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:05:39 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:05:39 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:05:39 geminisse.go:51: newclients: 1
+2025/07/28 01:05:40 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:05:40 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:05:40 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:05:40 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:05:40 geminisse.go:51: newclients: 1
+2025/07/28 01:05:40 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:05:40 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:05:40 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:05:40 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:05:40 geminisse.go:51: newclients: 1
+2025/07/28 01:05:43 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:05:43 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:05:43 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:05:43 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:05:43 geminisse.go:51: newclients: 1
+2025/07/28 01:05:43 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:05:43 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:05:43 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:05:43 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:05:43 geminisse.go:51: newclients: 1
+2025/07/28 01:05:44 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:05:44 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:05:44 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:05:44 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:05:44 geminisse.go:51: newclients: 1
+2025/07/28 01:05:44 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:05:44 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:05:44 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:05:44 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:05:44 geminisse.go:51: newclients: 1
+2025/07/28 01:05:44 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:05:44 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:05:44 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:05:44 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:05:44 geminisse.go:51: newclients: 1
+2025/07/28 01:05:44 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:05:44 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:05:44 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:05:44 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:05:44 geminisse.go:51: newclients: 1
+2025/07/28 01:05:48 main.go:73: Goroutines: 13
+2025/07/28 01:05:58 main.go:73: Goroutines: 13
+2025/07/28 01:06:08 main.go:73: Goroutines: 13
+2025/07/28 01:06:18 main.go:73: Goroutines: 13
+2025/07/28 01:06:28 main.go:73: Goroutines: 13
+2025/07/28 01:06:38 main.go:73: Goroutines: 13
+2025/07/28 01:06:48 main.go:73: Goroutines: 13
+2025/07/28 01:06:58 main.go:73: Goroutines: 13
+2025/07/28 01:07:08 main.go:73: Goroutines: 13
+2025/07/28 01:07:18 main.go:73: Goroutines: 13
+2025/07/28 01:07:28 main.go:73: Goroutines: 13
+2025/07/28 01:07:38 main.go:73: Goroutines: 13
+2025/07/28 01:07:48 main.go:73: Goroutines: 13
+2025/07/28 01:07:58 main.go:73: Goroutines: 13
+2025/07/28 01:08:08 main.go:73: Goroutines: 13
+2025/07/28 01:08:17 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:08:17 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:08:17 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:08:17 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:08:17 geminisse.go:51: newclients: 1
+2025/07/28 01:08:18 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:08:18 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:08:18 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:08:18 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:08:18 geminisse.go:51: newclients: 1
+2025/07/28 01:08:18 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:08:18 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:08:18 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:08:18 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:08:18 geminisse.go:51: newclients: 1
+2025/07/28 01:08:18 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:08:18 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:08:18 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:08:18 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:08:18 geminisse.go:51: newclients: 1
+2025/07/28 01:08:18 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:08:18 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:08:18 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:08:18 main.go:73: Goroutines: 11
+2025/07/28 01:08:18 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:08:18 geminisse.go:51: newclients: 1
+2025/07/28 01:08:19 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:08:19 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:08:19 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:08:19 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:08:19 geminisse.go:51: newclients: 1
+2025/07/28 01:08:19 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:08:19 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:08:19 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:08:19 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:08:19 geminisse.go:51: newclients: 1
+2025/07/28 01:08:28 main.go:73: Goroutines: 13
+2025/07/28 01:08:38 main.go:73: Goroutines: 13
+2025/07/28 01:08:48 main.go:73: Goroutines: 13
+2025/07/28 01:08:58 main.go:73: Goroutines: 13
+2025/07/28 01:09:08 main.go:73: Goroutines: 13
+2025/07/28 01:09:18 main.go:73: Goroutines: 13
+2025/07/28 01:09:28 main.go:73: Goroutines: 13
+2025/07/28 01:09:38 main.go:73: Goroutines: 13
+2025/07/28 01:09:48 main.go:73: Goroutines: 13
+2025/07/28 01:09:58 main.go:73: Goroutines: 13
+2025/07/28 01:10:08 main.go:73: Goroutines: 13
+2025/07/28 01:10:18 main.go:73: Goroutines: 13
+2025/07/28 01:10:28 main.go:73: Goroutines: 13
+2025/07/28 01:10:38 main.go:73: Goroutines: 13
+2025/07/28 01:10:48 main.go:73: Goroutines: 13
+2025/07/28 01:10:58 main.go:73: Goroutines: 13
+2025/07/28 01:11:08 main.go:73: Goroutines: 12
+2025/07/28 01:11:18 main.go:73: Goroutines: 12
+2025/07/28 01:11:28 main.go:73: Goroutines: 12
+2025/07/28 01:11:38 main.go:73: Goroutines: 12
+2025/07/28 01:11:48 main.go:73: Goroutines: 12
+2025/07/28 01:11:58 main.go:73: Goroutines: 12
+2025/07/28 01:12:08 main.go:73: Goroutines: 13
+2025/07/28 01:12:10 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:12:10 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:12:10 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:12:12 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:12:12 geminisse.go:51: newclients: 1
+2025/07/28 01:12:14 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:12:14 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:12:14 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:12:14 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:12:14 geminisse.go:51: newclients: 1
+2025/07/28 01:12:18 main.go:73: Goroutines: 13
+2025/07/28 01:12:28 main.go:73: Goroutines: 13
+2025/07/28 01:12:38 main.go:73: Goroutines: 13
+2025/07/28 01:12:48 main.go:73: Goroutines: 13
+2025/07/28 01:12:58 main.go:73: Goroutines: 13
+2025/07/28 01:13:08 main.go:73: Goroutines: 13
+2025/07/28 01:13:18 main.go:73: Goroutines: 13
+2025/07/28 01:13:28 main.go:73: Goroutines: 13
+2025/07/28 01:13:38 main.go:73: Goroutines: 13
+2025/07/28 01:13:48 main.go:73: Goroutines: 13
+2025/07/28 01:13:58 main.go:73: Goroutines: 13
+2025/07/28 01:14:08 main.go:73: Goroutines: 13
+2025/07/28 01:14:18 main.go:73: Goroutines: 13
+2025/07/28 01:14:28 main.go:73: Goroutines: 13
+2025/07/28 01:14:38 main.go:73: Goroutines: 13
+2025/07/28 01:14:48 main.go:73: Goroutines: 13
+2025/07/28 01:14:58 main.go:73: Goroutines: 13
+2025/07/28 01:15:08 main.go:73: Goroutines: 13
+2025/07/28 01:15:18 main.go:73: Goroutines: 13
+2025/07/28 01:15:28 main.go:73: Goroutines: 13
+2025/07/28 01:15:38 main.go:73: Goroutines: 13
+2025/07/28 01:15:48 main.go:73: Goroutines: 13
+2025/07/28 01:15:58 main.go:73: Goroutines: 13
+2025/07/28 01:16:08 main.go:73: Goroutines: 13
+2025/07/28 01:16:18 main.go:73: Goroutines: 13
+2025/07/28 01:16:28 main.go:73: Goroutines: 13
+2025/07/28 01:16:38 main.go:73: Goroutines: 13
+2025/07/28 01:16:48 main.go:73: Goroutines: 13
+2025/07/28 01:16:58 main.go:73: Goroutines: 13
+2025/07/28 01:16:59 geminisse.go:115: HTTP context done for client.
+2025/07/28 01:16:59 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 01:16:59 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 01:17:00 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 01:17:00 geminisse.go:51: newclients: 1
+2025/07/28 01:17:08 main.go:73: Goroutines: 13
+2025/07/28 01:17:18 main.go:73: Goroutines: 13
+2025/07/28 01:17:28 main.go:73: Goroutines: 13
+2025/07/28 01:17:38 main.go:73: Goroutines: 13
+2025/07/28 01:17:48 main.go:73: Goroutines: 13
+2025/07/28 01:17:58 main.go:73: Goroutines: 13
+2025/07/28 01:18:08 main.go:73: Goroutines: 13
+2025/07/28 01:18:18 main.go:73: Goroutines: 13
+2025/07/28 01:18:28 main.go:73: Goroutines: 13
+2025/07/28 01:18:38 main.go:73: Goroutines: 13
+2025/07/28 01:18:48 main.go:73: Goroutines: 13
+2025/07/28 01:18:58 main.go:73: Goroutines: 13
+2025/07/28 01:19:08 main.go:73: Goroutines: 13
+2025/07/28 01:19:18 main.go:73: Goroutines: 13
+2025/07/28 01:19:28 main.go:73: Goroutines: 13
+2025/07/28 01:19:38 main.go:73: Goroutines: 13
+2025/07/28 01:19:48 main.go:73: Goroutines: 13
+2025/07/28 01:19:58 main.go:73: Goroutines: 13
+2025/07/28 01:20:08 main.go:73: Goroutines: 13
+2025/07/28 01:20:18 main.go:73: Goroutines: 13
+2025/07/28 01:20:28 main.go:73: Goroutines: 13
+2025/07/28 01:20:38 main.go:73: Goroutines: 13
+2025/07/28 01:20:48 main.go:73: Goroutines: 13
+2025/07/28 01:20:58 main.go:73: Goroutines: 13
+2025/07/28 01:21:08 main.go:73: Goroutines: 13
+2025/07/28 01:21:18 main.go:73: Goroutines: 13
+2025/07/28 01:21:28 main.go:73: Goroutines: 13
+2025/07/28 01:21:38 main.go:73: Goroutines: 13
+2025/07/28 01:21:48 main.go:73: Goroutines: 13
+2025/07/28 01:21:58 main.go:73: Goroutines: 13

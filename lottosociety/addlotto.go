@@ -22,6 +22,10 @@ func AddOrUpdateLottoHandler(db *sql.DB) http.HandlerFunc {
 			return
 		}
 		if req.Date != "" {
+			if req.Date == "Invalid Date" {
+				http.Error(w, "Invalid date value", http.StatusBadRequest)
+				return
+			}
 			// Update row by date
 			res, err := db.Exec("UPDATE lottosociety SET thaidate=?, fnum=?, snum=?, id=?, text=? WHERE date=?", req.ThaiDate, req.FNum, req.SNum, req.ID, req.Text, req.Date)
 			if err != nil {
@@ -53,6 +57,25 @@ func AddOrUpdateLottoHandler(db *sql.DB) http.HandlerFunc {
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]interface{}{
 			"status": "inserted",
+		})
+	}
+}
+
+// DeleteAllLottoHandler handles POST /deletelottoall to delete all rows
+func DeleteAllLottoHandler(db *sql.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodGet {
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
+		_, err := db.Exec("DELETE FROM lottosociety")
+		if err != nil {
+			http.Error(w, "Database delete error: "+err.Error(), http.StatusInternalServerError)
+			return
+		}
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(map[string]interface{}{
+			"status": "all deleted",
 		})
 	}
 }
