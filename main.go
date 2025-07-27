@@ -97,10 +97,10 @@ func main() {
 	http.HandleFunc("/register", user.RegisterUserHandler(db))
 	http.HandleFunc("/chat/ban", chat.BanHandler(db)) // Alias for ban handler
 	http.HandleFunc("/chat/report", chat.ReportHandler(db))
-	http.HandleFunc("/futurepaper/addpaper", futurepaper.UploadPaperImageHandler)           // Alias for add paper handler
-	http.HandleFunc("/lottosociety/addlotto", lottosociety.AddOrUpdateLottoHandler(db))     // Alias for add lotto handler
-	http.HandleFunc("/lottosociety/getlotto", lottosociety.GetLottoHandler(db))             // Alias for get lotto handler
-	http.HandleFunc("/lottosociety/deletelottoall", lottosociety.DeleteAllLottoHandler(db)) // Alias for delete all lotto handler
+	http.HandleFunc("/futurepaper/addpaper", futurepaper.UploadPaperImageHandler)       // Alias for add paper handler
+	http.HandleFunc("/lottosociety/addlotto", lottosociety.AddOrUpdateLottoHandler(db)) // Alias for add lotto handler
+	http.HandleFunc("/lottosociety/getlotto", lottosociety.GetLottoHandler(db))         // Alias for get lotto handler
+	// Alias for delete all lotto handler
 	// Alias for login handler
 	// Alias for report handler
 	// --- WebSocket Broker Setup (NEW) ---
