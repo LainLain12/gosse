@@ -10,10 +10,24 @@ import (
 	"time"
 )
 
-// GiftDataHandler handles GET /giftdata and returns all rows as JSON
+// Gift struct with category support
+
+// GiftDataHandler handles GET /giftdata and returns rows as JSON, filtered by id and/or category if provided
 func GiftDataHandler(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		rows, err := db.Query(`SELECT id, name, url FROM gift`)
+		id := r.URL.Query().Get("id")
+		category := r.URL.Query().Get("category")
+		var rows *sql.Rows
+		var err error
+		if id != "" && category != "" {
+			rows, err = db.Query(`SELECT id, category, name, url FROM gift WHERE id=? AND category=?`, id, category)
+		} else if id != "" {
+			rows, err = db.Query(`SELECT id, category, name, url FROM gift WHERE id=?`, id)
+		} else if category != "" {
+			rows, err = db.Query(`SELECT id, category, name, url FROM gift WHERE category=?`, category)
+		} else {
+			rows, err = db.Query(`SELECT id, category, name, url FROM gift`)
+		}
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -22,7 +36,7 @@ func GiftDataHandler(db *sql.DB) http.HandlerFunc {
 		var all []Gift
 		for rows.Next() {
 			var g Gift
-			err := rows.Scan(&g.ID, &g.Name, &g.URL)
+			err := rows.Scan(&g.ID, &g.Category, &g.Name, &g.URL)
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
@@ -40,7 +54,7 @@ func AddGiftHandler(db *sql.DB) http.HandlerFunc {
 		defer func() {
 			if rec := recover(); rec != nil {
 				http.Error(w, "Internal server error (panic)", http.StatusInternalServerError)
-				fmt.Fprintf(os.Stderr, "PANIC in AddImageHandler: %v\n", rec)
+				fmt.Fprintf(os.Stderr, "PANIC in AddGiftHandler: %v\n", rec)
 			}
 		}()
 		if r.Method != http.MethodPost {
@@ -86,10 +100,14 @@ func AddGiftHandler(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		// Insert or update gift table
+		// Insert or update gift table with id and category
 		id := r.URL.Query().Get("id")
 		if id == "" {
 			id = fmt.Sprintf("%d", time.Now().UnixNano())
+		}
+		category := r.URL.Query().Get("category")
+		if category == "" {
+			category = "default"
 		}
 		name := fname
 		relUrl := "/gift/images/" + fname
@@ -97,10 +115,10 @@ func AddGiftHandler(db *sql.DB) http.HandlerFunc {
 		host := r.Host
 		fullUrl := scheme + "://" + host + relUrl
 
-		// If id exists, get old url and delete old file after update
+		// If id+category exists, get old url and delete old file after update
 		var oldUrl string
 		var oldFilename string
-		err = db.QueryRow("SELECT url FROM gift WHERE id=?", id).Scan(&oldUrl)
+		err = db.QueryRow("SELECT url FROM gift WHERE id=? AND category=?", id, category).Scan(&oldUrl)
 		if err == nil && oldUrl != "" {
 			// Always extract filename after last slash
 			lastSlash := -1
@@ -115,11 +133,11 @@ func AddGiftHandler(db *sql.DB) http.HandlerFunc {
 			}
 		}
 
-		res, err := db.Exec("UPDATE gift SET url=? WHERE id=?", fullUrl, id)
+		res, err := db.Exec("UPDATE gift SET url=?, name=? WHERE id=? AND category=?", fullUrl, name, id, category)
 		rowsAffected, _ := res.RowsAffected()
 		if err != nil || rowsAffected == 0 {
 			// Insert if update did not affect any row
-			_, err := db.Exec("INSERT OR REPLACE INTO gift (id, name, url) VALUES (?, ?, ?)", id, name, fullUrl)
+			_, err := db.Exec("INSERT OR REPLACE INTO gift (id, category, name, url) VALUES (?, ?, ?, ?)", id, category, name, fullUrl)
 			if err != nil {
 				http.Error(w, "DB error: "+err.Error(), http.StatusInternalServerError)
 				return
@@ -128,7 +146,7 @@ func AddGiftHandler(db *sql.DB) http.HandlerFunc {
 
 		// Delete old file if needed
 		if oldFilename != "" && oldFilename != fname {
-			oldPath := "/gift/images/" + oldFilename
+			oldPath := "gift/images/" + oldFilename
 			_ = os.Remove(oldPath)
 		}
 
@@ -137,10 +155,9 @@ func AddGiftHandler(db *sql.DB) http.HandlerFunc {
 			"status":    "success",
 			"imagename": fname,
 			"id":        id,
+			"category":  category,
 			"url":       fullUrl,
 		})
-		// To serve images, add this in main.go:
-		// http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("images"))))
 	}
 }
 

@@ -26,8 +26,8 @@ func InitDB(dbPath string) *sql.DB {
         nmodern TEXT,
         ninternet TEXT,
         updatetime TEXT,
-        date DATE,
-        status BOOLEAN
+        date TEXT,
+        status TEXT
     );`
 	_, err = db.Exec(createTable)
 	if err != nil {

@@ -14,6 +14,7 @@ import (
 	"gosse/gift"
 	"gosse/threedata"
 	"gosse/twoddata"
+	"gosse/user"
 	"log"
 	"net/http"
 	"os"
@@ -45,14 +46,24 @@ func main() {
 			debug.PrintStack()
 		}
 	}()
+
+	// Initialize the report table in the database
 	// Initialize SQLite DB and table
+	// Initialize twoddata database
 
 	db := twoddata.InitDB("twoddata.db")
+	chat.InitBanTable(db) // Initialize the ban table in the database
+	chat.InitReportTable(db)
+	// Initialize other databases
 	giftDB := gift.InitGiftDB("twoddata.db")
 	threedDB := threedata.InitThreedDB("twoddata.db")
 	defer db.Close()
 	defer giftDB.Close()
 
+	es := user.CreateUserAccountTable(db)
+	if es != nil {
+		log.Fatal("Failed to create useraccount table:", es)
+	}
 	/// check go routine count
 	go func() {
 		for {
@@ -80,7 +91,11 @@ func main() {
 	http.HandleFunc("/futurepaper/getpaper", futurepaper.GetPaperHandler)
 	http.HandleFunc("/chat/sendmessage", chat.SendMessageHandler)
 	http.HandleFunc("/chat/sse", chat.ChatSSEHandler)
-
+	http.HandleFunc("/register", user.RegisterUserHandler(db))
+	http.HandleFunc("/chat/ban", chat.BanHandler(db)) // Alias for ban handler
+	http.HandleFunc("/chat/report", chat.ReportHandler(db))
+	http.HandleFunc("futurepaper/addpaper", futurepaper.UploadPaperImageHandler) // Alias for add paper handler
+	// Alias for report handler
 	// --- WebSocket Broker Setup (NEW) ---
 	wsBroker := Live.NewWebSocketBroker()             // Initialize the new WebSocket broker
 	wsBroker.Start()                                  // Start the WebSocket broker's main loop
