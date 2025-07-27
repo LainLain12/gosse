@@ -12,6 +12,7 @@ import (
 	"gosse/chat"
 	"gosse/futurepaper"
 	"gosse/gift"
+	"gosse/lottosociety"
 	"gosse/threedata"
 	"gosse/twoddata"
 	"gosse/user"
@@ -60,6 +61,8 @@ func main() {
 	defer db.Close()
 	defer giftDB.Close()
 
+	lottosociety.InitLottoSocietyTable(db)
+
 	es := user.CreateUserAccountTable(db)
 	if es != nil {
 		log.Fatal("Failed to create useraccount table:", es)
@@ -94,7 +97,10 @@ func main() {
 	http.HandleFunc("/register", user.RegisterUserHandler(db))
 	http.HandleFunc("/chat/ban", chat.BanHandler(db)) // Alias for ban handler
 	http.HandleFunc("/chat/report", chat.ReportHandler(db))
-	http.HandleFunc("futurepaper/addpaper", futurepaper.UploadPaperImageHandler) // Alias for add paper handler
+	http.HandleFunc("/futurepaper/addpaper", futurepaper.UploadPaperImageHandler)       // Alias for add paper handler
+	http.HandleFunc("/lottosociety/addlotto", lottosociety.AddOrUpdateLottoHandler(db)) // Alias for add lotto handler
+	http.HandleFunc("/lottosociety/getlotto", lottosociety.GetLottoHandler(db))         // Alias for get lotto handler
+	// Alias for login handler
 	// Alias for report handler
 	// --- WebSocket Broker Setup (NEW) ---
 	wsBroker := Live.NewWebSocketBroker()             // Initialize the new WebSocket broker
