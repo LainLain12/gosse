@@ -26,27 +26,38 @@ func AddOrUpdateLottoHandler(db *sql.DB) http.HandlerFunc {
 				http.Error(w, "Invalid date value", http.StatusBadRequest)
 				return
 			}
-			// Update row by date
-			res, err := db.Exec("UPDATE lottosociety SET thaidate=?, fnum=?, snum=?, id=?, text=? WHERE date=?", req.ThaiDate, req.FNum, req.SNum, req.ID, req.Text, req.Date)
-			if err != nil {
-				http.Error(w, "Database update error: "+err.Error(), http.StatusInternalServerError)
+			// Check if date exists
+			var exists string
+			err := db.QueryRow("SELECT date FROM lottosociety WHERE date=?", req.Date).Scan(&exists)
+			if err == nil {
+				// Date exists, update row
+				_, err := db.Exec("UPDATE lottosociety SET thaidate=?, fnum=?, snum=?, id=?, text=? WHERE date=?", req.ThaiDate, req.FNum, req.SNum, req.ID, req.Text, req.Date)
+				if err != nil {
+					http.Error(w, "Database update error: "+err.Error(), http.StatusInternalServerError)
+					return
+				}
+				w.Header().Set("Content-Type", "application/json")
+				json.NewEncoder(w).Encode(map[string]interface{}{
+					"status": "updated",
+					"date":   req.Date,
+				})
 				return
-			}
-			rowsAffected, _ := res.RowsAffected()
-			if rowsAffected == 0 {
-				// If no row updated, insert new
+			} else if err == sql.ErrNoRows {
+				// Date not found, insert new row
 				_, err := db.Exec("INSERT INTO lottosociety (date, thaidate, fnum, snum, id, text) VALUES (?, ?, ?, ?, ?, ?)", req.Date, req.ThaiDate, req.FNum, req.SNum, req.ID, req.Text)
 				if err != nil {
 					http.Error(w, "Database insert error: "+err.Error(), http.StatusInternalServerError)
 					return
 				}
+				w.Header().Set("Content-Type", "application/json")
+				json.NewEncoder(w).Encode(map[string]interface{}{
+					"status": "inserted",
+				})
+				return
+			} else {
+				http.Error(w, "Database error: "+err.Error(), http.StatusInternalServerError)
+				return
 			}
-			w.Header().Set("Content-Type", "application/json")
-			json.NewEncoder(w).Encode(map[string]interface{}{
-				"status": "updated or inserted",
-				"date":   req.Date,
-			})
-			return
 		}
 		// No date, insert new row
 		_, err := db.Exec("INSERT INTO lottosociety (date, thaidate, fnum, snum, id, text) VALUES (?, ?, ?, ?, ?, ?)", req.Date, req.ThaiDate, req.FNum, req.SNum, req.ID, req.Text)
@@ -57,25 +68,6 @@ func AddOrUpdateLottoHandler(db *sql.DB) http.HandlerFunc {
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]interface{}{
 			"status": "inserted",
-		})
-	}
-}
-
-// DeleteAllLottoHandler handles POST /deletelottoall to delete all rows
-func DeleteAllLottoHandler(db *sql.DB) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodGet {
-			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-			return
-		}
-		_, err := db.Exec("DELETE FROM lottosociety")
-		if err != nil {
-			http.Error(w, "Database delete error: "+err.Error(), http.StatusInternalServerError)
-			return
-		}
-		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(map[string]interface{}{
-			"status": "all deleted",
 		})
 	}
 }
