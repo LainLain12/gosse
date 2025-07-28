@@ -72,9 +72,7 @@ func (b *Broker) Start() {
 						log.Printf("Skipping dead client during broadcast.")
 					default:
 						// Client's channel is blocked, indicating a slow consumer.
-						// We can log this or implement more sophisticated backpressure.
 						log.Printf("Client channel blocked, potentially slow consumer.")
-						// Optionally, you could mark this client for disconnection if consistently slow.
 					}
 				}
 				b.mu.RUnlock()
@@ -87,7 +85,6 @@ func (b *Broker) Start() {
 func (b *Broker) SSEHandler(w http.ResponseWriter, r *http.Request) {
 	// Set necessary headers for SSE
 	w.Header().Set("Content-Type", "text/event-stream")
-	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Cache-Control", "no-cache")
 	w.Header().Set("Connection", "keep-alive")
 	w.Header().Set("Access-Control-Allow-Origin", "*") // For CORS
@@ -109,24 +106,31 @@ func (b *Broker) SSEHandler(w http.ResponseWriter, r *http.Request) {
 	b.newClients <- client
 
 	// Listen for client disconnection (HTTP connection close)
-	// r.Context().Done() is the most robust way to detect client disconnects.
 	go func() {
-		<-r.Context().Done() // This blocks until the client disconnects or request context is cancelled
+		<-r.Context().Done()
 		log.Printf("HTTP context done for client.")
-		b.closedClients <- client // Signal the broker to remove this client
+		b.closedClients <- client
 	}()
 
-	// Keep connection alive and send messages
+	// Send the latest live data immediately on connect
+	data, _ := json.Marshal(liveDataStore)
+	fmt.Fprintf(w, "data: %s\n\n", string(data))
+	flusher.Flush()
+
+	// Keep connection alive and send messages, with ping-pong
+	pingTicker := time.NewTicker(15 * time.Second)
+	defer pingTicker.Stop()
 	for {
 		select {
 		case msg := <-client.MessageChannel:
-			// Format and send the SSE message
 			fmt.Fprintf(w, "data: %s\n\n", msg)
-			flusher.Flush() // Flush the data to the client immediately
+			flusher.Flush()
+		case <-pingTicker.C:
+			fmt.Fprintf(w, ": ping\n\n")
+			flusher.Flush()
 		case <-client.Done:
-			// Client was explicitly marked as done by the broker (e.g., due to disconnect)
 			log.Printf("Client goroutine exiting due to Done signal.")
-			return // Exit the handler goroutine
+			return
 		}
 	}
 }
@@ -136,33 +140,21 @@ func (b *Broker) StartBroadcastingTime() {
 	ticker := time.NewTicker(1 * time.Second)
 	defer ticker.Stop()
 
+	var previousLive string
+
 	for {
 		select {
 		case <-ticker.C:
-
 			data, _ := json.Marshal(liveDataStore)
-
-			b.broadcaster <- string(data) // Send message to the broker for broadcasting
-		case <-time.After(1 * time.Minute): // Example: Periodically check if clients exist
+			currentLive := string(data)
+			if currentLive != previousLive {
+				b.broadcaster <- currentLive
+				previousLive = currentLive
+			}
+		case <-time.After(1 * time.Minute):
 			if b.totalClients == 0 {
 				log.Printf("No active clients. Consider pausing broadcasts to save CPU.")
-				// In a real application, you might stop this goroutine or reduce frequency
-				// if there are no active listeners to save resources.
 			}
 		}
 	}
-}
-
-func GeminiPageHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html")
-	w.Write([]byte(`<!DOCTYPE html>
-<html><body>
-<pre id="json"></pre>
-<script>
-var es = new EventSource('/');
-es.onmessage = function(e) {
-  document.getElementById('json').textContent = e.data;
-};
-</script>
-</body></html>`))
 }
