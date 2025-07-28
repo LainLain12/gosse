@@ -31151,3 +31151,175 @@
 2025/07/28 01:55:12 main.go:73: Goroutines: 9
 2025/07/28 01:55:22 main.go:73: Goroutines: 9
 2025/07/28 01:55:32 main.go:73: Goroutines: 9
+2025/07/28 02:00:57 main.go:73: Goroutines: 5
+2025/07/28 02:00:57 main.go:116: SSE server started on :1411
+2025/07/28 02:01:07 main.go:73: Goroutines: 9
+2025/07/28 02:01:17 main.go:73: Goroutines: 9
+2025/07/28 02:01:27 main.go:73: Goroutines: 10
+2025/07/28 02:01:33 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 02:01:33 geminisse.go:51: newclients: 1
+2025/07/28 02:01:37 main.go:73: Goroutines: 14
+2025/07/28 02:01:47 main.go:73: Goroutines: 14
+2025/07/28 02:01:57 main.go:73: Goroutines: 14
+2025/07/28 02:02:07 main.go:73: Goroutines: 14
+2025/07/28 02:02:17 main.go:73: Goroutines: 14
+2025/07/28 02:02:27 main.go:73: Goroutines: 14
+2025/07/28 02:02:37 main.go:73: Goroutines: 14
+2025/07/28 02:02:47 main.go:73: Goroutines: 14
+2025/07/28 02:02:57 main.go:73: Goroutines: 14
+2025/07/28 02:03:07 main.go:73: Goroutines: 13
+2025/07/28 02:03:17 main.go:73: Goroutines: 13
+2025/07/28 02:03:27 main.go:73: Goroutines: 13
+2025/07/28 02:03:37 main.go:73: Goroutines: 13
+2025/07/28 02:03:47 main.go:73: Goroutines: 13
+2025/07/28 02:03:57 main.go:73: Goroutines: 13
+2025/07/28 02:04:07 main.go:73: Goroutines: 13
+2025/07/28 02:04:17 main.go:73: Goroutines: 13
+2025/07/28 02:04:27 main.go:73: Goroutines: 13
+2025/07/28 02:04:37 main.go:73: Goroutines: 13
+2025/07/28 02:04:47 main.go:73: Goroutines: 13
+2025/07/28 02:04:53 main.go:73: Goroutines: 5
+2025/07/28 02:04:53 main.go:116: SSE server started on :1411
+2025/07/28 02:05:02 main.go:73: Goroutines: 5
+2025/07/28 02:05:02 main.go:116: SSE server started on :1411
+2025/07/28 02:05:12 main.go:73: Goroutines: 9
+2025/07/28 02:05:22 main.go:73: Goroutines: 12
+2025/07/28 02:05:23 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 02:05:23 geminisse.go:51: newclients: 1
+2025/07/28 02:05:26 geminisse.go:115: HTTP context done for client.
+2025/07/28 02:05:26 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 02:05:26 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 02:05:26 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 02:05:26 geminisse.go:51: newclients: 1
+2025/07/28 02:05:27 geminisse.go:115: HTTP context done for client.
+2025/07/28 02:05:27 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 02:05:27 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 02:05:27 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 02:05:27 geminisse.go:51: newclients: 1
+2025/07/28 02:05:27 geminisse.go:115: HTTP context done for client.
+2025/07/28 02:05:27 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 02:05:27 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 02:05:27 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 02:05:27 geminisse.go:51: newclients: 1
+2025/07/28 02:05:27 geminisse.go:115: HTTP context done for client.
+2025/07/28 02:05:27 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 02:05:27 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 02:05:27 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 02:05:27 geminisse.go:51: newclients: 1
+2025/07/28 02:05:32 main.go:73: Goroutines: 13
+2025/07/28 02:05:42 main.go:73: Goroutines: 13
+2025/07/28 02:05:52 main.go:73: Goroutines: 13
+2025/07/28 02:06:02 main.go:73: Goroutines: 13
+2025/07/28 02:06:12 main.go:73: Goroutines: 13
+2025/07/28 02:06:22 main.go:73: Goroutines: 13
+2025/07/28 02:06:32 main.go:73: Goroutines: 13
+2025/07/28 02:06:42 main.go:73: Goroutines: 13
+2025/07/28 02:06:52 main.go:73: Goroutines: 13
+2025/07/28 02:07:02 main.go:73: Goroutines: 13
+2025/07/28 02:07:12 main.go:73: Goroutines: 13
+2025/07/28 02:07:22 main.go:73: Goroutines: 13
+2025/07/28 02:07:32 main.go:73: Goroutines: 13
+2025/07/28 02:07:42 main.go:73: Goroutines: 13
+2025/07/28 02:07:52 main.go:73: Goroutines: 13
+2025/07/28 02:08:02 main.go:73: Goroutines: 13
+2025/07/28 02:08:12 main.go:73: Goroutines: 13
+2025/07/28 02:08:22 main.go:73: Goroutines: 12
+2025/07/28 02:08:32 main.go:73: Goroutines: 13
+2025/07/28 02:08:42 main.go:73: Goroutines: 13
+2025/07/28 02:08:52 main.go:73: Goroutines: 13
+2025/07/28 02:09:02 main.go:73: Goroutines: 12
+2025/07/28 02:09:11 geminisse.go:115: HTTP context done for client.
+2025/07/28 02:09:11 geminisse.go:61: Client disconnected. Total clients: 0
+2025/07/28 02:09:11 geminisse.go:128: Client goroutine exiting due to Done signal.
+2025/07/28 02:09:12 geminisse.go:50: New client connected. Total clients: 1
+2025/07/28 02:09:12 geminisse.go:51: newclients: 1
+2025/07/28 02:09:12 main.go:73: Goroutines: 13
+2025/07/28 02:09:22 main.go:73: Goroutines: 13
+2025/07/28 02:09:32 main.go:73: Goroutines: 12
+2025/07/28 02:09:42 main.go:73: Goroutines: 12
+2025/07/28 02:09:52 main.go:73: Goroutines: 12
+2025/07/28 02:10:02 main.go:73: Goroutines: 12
+2025/07/28 02:10:12 main.go:73: Goroutines: 12
+2025/07/28 02:10:22 main.go:73: Goroutines: 12
+2025/07/28 02:10:32 main.go:73: Goroutines: 12
+2025/07/28 02:10:42 main.go:73: Goroutines: 12
+2025/07/28 02:10:52 main.go:73: Goroutines: 12
+2025/07/28 02:11:02 main.go:73: Goroutines: 12
+2025/07/28 02:11:12 main.go:73: Goroutines: 12
+2025/07/28 02:11:22 main.go:73: Goroutines: 12
+2025/07/28 02:11:32 main.go:73: Goroutines: 12
+2025/07/28 02:11:42 main.go:73: Goroutines: 12
+2025/07/28 02:11:52 main.go:73: Goroutines: 12
+2025/07/28 02:12:02 main.go:73: Goroutines: 12
+2025/07/28 02:12:12 main.go:73: Goroutines: 12
+2025/07/28 02:12:22 main.go:73: Goroutines: 12
+2025/07/28 02:12:32 main.go:73: Goroutines: 12
+2025/07/28 02:12:42 main.go:73: Goroutines: 12
+2025/07/28 02:12:52 main.go:73: Goroutines: 12
+2025/07/28 02:13:02 main.go:73: Goroutines: 12
+2025/07/28 02:13:12 main.go:73: Goroutines: 12
+2025/07/28 02:13:22 main.go:73: Goroutines: 12
+2025/07/28 02:13:32 main.go:73: Goroutines: 12
+2025/07/28 02:13:42 main.go:73: Goroutines: 12
+2025/07/28 02:13:52 main.go:73: Goroutines: 12
+2025/07/28 02:14:02 main.go:73: Goroutines: 12
+2025/07/28 02:14:12 main.go:73: Goroutines: 12
+2025/07/28 02:14:22 main.go:73: Goroutines: 12
+2025/07/28 02:14:32 main.go:73: Goroutines: 12
+2025/07/28 02:14:42 main.go:73: Goroutines: 12
+2025/07/28 02:14:52 main.go:73: Goroutines: 12
+2025/07/28 02:15:02 main.go:73: Goroutines: 12
+2025/07/28 02:15:12 main.go:73: Goroutines: 12
+2025/07/28 02:15:22 main.go:73: Goroutines: 12
+2025/07/28 02:15:32 main.go:73: Goroutines: 12
+2025/07/28 02:15:42 main.go:73: Goroutines: 12
+2025/07/28 02:15:52 main.go:73: Goroutines: 12
+2025/07/28 02:16:02 main.go:73: Goroutines: 12
+2025/07/28 02:16:12 main.go:73: Goroutines: 12
+2025/07/28 02:16:22 main.go:73: Goroutines: 12
+2025/07/28 02:16:32 main.go:73: Goroutines: 12
+2025/07/28 02:16:42 main.go:73: Goroutines: 12
+2025/07/28 02:16:52 main.go:73: Goroutines: 12
+2025/07/28 02:17:02 main.go:73: Goroutines: 12
+2025/07/28 02:17:12 main.go:73: Goroutines: 12
+2025/07/28 02:17:22 main.go:73: Goroutines: 12
+2025/07/28 02:17:32 main.go:73: Goroutines: 12
+2025/07/28 02:17:42 main.go:73: Goroutines: 12
+2025/07/28 02:17:52 main.go:73: Goroutines: 12
+2025/07/28 02:18:02 main.go:73: Goroutines: 12
+2025/07/28 02:18:12 main.go:73: Goroutines: 12
+2025/07/28 02:18:22 main.go:73: Goroutines: 12
+2025/07/28 02:18:32 main.go:73: Goroutines: 12
+2025/07/28 02:18:42 main.go:73: Goroutines: 12
+2025/07/28 02:18:52 main.go:73: Goroutines: 12
+2025/07/28 02:19:02 main.go:73: Goroutines: 12
+2025/07/28 02:19:12 main.go:73: Goroutines: 12
+2025/07/28 02:19:22 main.go:73: Goroutines: 12
+2025/07/28 02:19:32 main.go:73: Goroutines: 12
+2025/07/28 02:19:42 main.go:73: Goroutines: 12
+2025/07/28 02:19:52 main.go:73: Goroutines: 12
+2025/07/28 02:20:02 main.go:73: Goroutines: 12
+2025/07/28 02:20:12 main.go:73: Goroutines: 12
+2025/07/28 02:20:22 main.go:73: Goroutines: 12
+2025/07/28 02:20:32 main.go:73: Goroutines: 12
+2025/07/28 02:20:42 main.go:73: Goroutines: 12
+2025/07/28 02:20:52 main.go:73: Goroutines: 12
+2025/07/28 02:21:02 main.go:73: Goroutines: 12
+2025/07/28 02:21:12 main.go:73: Goroutines: 12
+2025/07/28 02:21:22 main.go:73: Goroutines: 12
+2025/07/28 02:21:32 main.go:73: Goroutines: 12
+2025/07/28 02:21:42 main.go:73: Goroutines: 12
+2025/07/28 02:21:52 main.go:73: Goroutines: 12
+2025/07/28 02:22:02 main.go:73: Goroutines: 12
+2025/07/28 02:22:12 main.go:73: Goroutines: 12
+2025/07/28 02:22:22 main.go:73: Goroutines: 12
+2025/07/28 02:22:32 main.go:73: Goroutines: 12
+2025/07/28 02:22:42 main.go:73: Goroutines: 12
+2025/07/28 02:22:52 main.go:73: Goroutines: 12
+2025/07/28 02:23:02 main.go:73: Goroutines: 12
+2025/07/28 02:23:12 main.go:73: Goroutines: 12
+2025/07/28 02:23:22 main.go:73: Goroutines: 12
+2025/07/28 02:23:32 main.go:73: Goroutines: 12
+2025/07/28 02:23:42 main.go:73: Goroutines: 12
+2025/07/28 02:23:52 main.go:73: Goroutines: 12
+2025/07/28 02:24:02 main.go:73: Goroutines: 12
