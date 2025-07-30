@@ -23,6 +23,7 @@ func ChatSSEHandler(w http.ResponseWriter, r *http.Request) {
 	chatMu.Lock()
 	all := make([]any, len(chatMessages))
 	copy(all, chatMessages)
+	lastIdx := len(chatMessages)
 	chatMu.Unlock()
 	for _, msg := range all {
 		b, err := json.Marshal(msg)
@@ -33,7 +34,7 @@ func ChatSSEHandler(w http.ResponseWriter, r *http.Request) {
 	flusher.Flush()
 
 	// Track the last sent message index
-	lastIdx := len(all)
+	lastIdx = len(all)
 
 	// Broadcast new messages as they arrive (as single JSON object, not array)
 	notify := r.Context().Done()
