@@ -91,6 +91,8 @@ func main() {
 	http.HandleFunc("/addgift/", gift.AddGiftHandler(giftDB))
 	http.HandleFunc("/getpaper", futurepaper.GetPaperHandler)
 	http.HandleFunc("/futurepaper/getpaper", futurepaper.GetPaperHandler)
+	http.HandleFunc("/futurepaper/getallpaper", futurepaper.GetAllPaperHandler)
+
 	http.HandleFunc("/chat/sendmessage", chat.SendMessageHandler)
 	http.HandleFunc("/chat/sse", chat.ChatSSEHandler)
 	http.HandleFunc("/register", user.RegisterUserHandler(db))
@@ -111,7 +113,9 @@ func main() {
 	// Serve static images from /images/
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("images"))))
 	http.Handle("/gift/images/", http.StripPrefix("/gift/images/", http.FileServer(http.Dir("gift/images"))))
-	http.Handle("/futurepaper/images/", http.StripPrefix("/futurepaper/images/", http.FileServer(http.Dir("futurepaper/images"))))
+	http.Handle("/futurepaper/images/daily/", http.StripPrefix("/futurepaper/images/daily/", http.FileServer(http.Dir("futurepaper/images/daily"))))
+	http.Handle("/futurepaper/images/weekly/", http.StripPrefix("/futurepaper/images/weekly/", http.FileServer(http.Dir("futurepaper/images/weekly"))))
+
 	log.Println("SSE server started on :1411")
 	fmt.Println(http.ListenAndServe(":1411", nil))
 }
