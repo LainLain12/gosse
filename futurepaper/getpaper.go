@@ -39,7 +39,7 @@ func GetPaperHandler(w http.ResponseWriter, r *http.Request) {
 
 // GetAllPaperHandler returns JSON with image URLs in daily/ and weekly/ folders
 func GetAllPaperHandler(w http.ResponseWriter, r *http.Request) {
-	dirs := []string{"daily", "weekly"}
+	dirs := []string{"daily", "weekly", "calendar"}
 	exts := map[string]bool{".png": true, ".jpg": true, ".jpeg": true, ".gif": true, ".bmp": true, ".webp": true}
 
 	scheme := "http"
@@ -48,7 +48,7 @@ func GetAllPaperHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	host := r.Host
 
-	result := map[string][]string{"daily": {}, "weekly": {}}
+	result := map[string][]string{"daily": {}, "weekly": {}, "calendar": {}}
 	for _, dir := range dirs {
 		fullDir := filepath.Join("futurepaper/images", dir)
 		entries, err := os.ReadDir(fullDir)

@@ -25,6 +25,12 @@ import (
 )
 
 func main() {
+	// Set Yangon timezone
+	yangonLoc, err := time.LoadLocation("Asia/Yangon")
+	if err != nil {
+		log.Fatalf("Failed to load Yangon timezone: %v", err)
+	}
+	time.Local = yangonLoc
 	// 1. Log File ဖွင့်ခြင်း (သို့မဟုတ် အသစ်ဖန်တီးခြင်း)
 	// Output log to a file named server.log
 	logFile, err := os.OpenFile("server.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
@@ -115,6 +121,7 @@ func main() {
 	http.Handle("/gift/images/", http.StripPrefix("/gift/images/", http.FileServer(http.Dir("gift/images"))))
 	http.Handle("/futurepaper/images/daily/", http.StripPrefix("/futurepaper/images/daily/", http.FileServer(http.Dir("futurepaper/images/daily"))))
 	http.Handle("/futurepaper/images/weekly/", http.StripPrefix("/futurepaper/images/weekly/", http.FileServer(http.Dir("futurepaper/images/weekly"))))
+	http.Handle("/futurepaper/images/calendar/", http.StripPrefix("/futurepaper/images/calendar/", http.FileServer(http.Dir("futurepaper/images/calendar"))))
 
 	log.Println("SSE server started on :1411")
 	fmt.Println(http.ListenAndServe(":1411", nil))
