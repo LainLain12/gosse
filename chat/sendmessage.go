@@ -48,8 +48,10 @@ func SendMessageHandler(db *sql.DB) http.HandlerFunc {
 		}
 		// Attach normalized id back into message to ensure consistency
 		msg["id"] = id
-		publish(msg)
-		AddChatMessage(msg)
+		// First store (with dedup) then publish only if actually stored
+		if added := AddChatMessage(msg); added {
+			publish(msg)
+		}
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]any{
 			"status":  "success",

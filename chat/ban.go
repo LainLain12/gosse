@@ -35,11 +35,13 @@ func BanHandler(db *sql.DB) http.HandlerFunc {
 		}
 		var exists string
 		err := db.QueryRow("SELECT id FROM ban WHERE id=?", id).Scan(&exists)
-		if err == nil {
+		if err == nil { // already banned; ensure past messages removed
+			removed := RemoveMessagesByID(id)
 			w.Header().Set("Content-Type", "application/json")
 			json.NewEncoder(w).Encode(map[string]interface{}{
-				"status": "already ban",
-				"id":     id,
+				"status":           "already ban",
+				"id":               id,
+				"removed_messages": removed,
 			})
 			return
 		} else if err != sql.ErrNoRows {
@@ -52,10 +54,12 @@ func BanHandler(db *sql.DB) http.HandlerFunc {
 			http.Error(w, "Database insert error: "+err.Error(), http.StatusInternalServerError)
 			return
 		}
+		removed := RemoveMessagesByID(id)
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]interface{}{
-			"status": "banned",
-			"id":     id,
+			"status":           "banned",
+			"id":               id,
+			"removed_messages": removed,
 		})
 	}
 }
