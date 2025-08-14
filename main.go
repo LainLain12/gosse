@@ -99,7 +99,7 @@ func main() {
 	http.HandleFunc("/futurepaper/getpaper", futurepaper.GetPaperHandler)
 	http.HandleFunc("/futurepaper/getallpaper", futurepaper.GetAllPaperHandler)
 
-	http.HandleFunc("/chat/sendmessage", chat.SendMessageHandler)
+	http.HandleFunc("/chat/sendmessage", chat.SendMessageHandler(db))
 	http.HandleFunc("/chat/sse", chat.ChatSSEHandler)
 	http.HandleFunc("/register", user.RegisterUserHandler(db))
 	http.HandleFunc("/chat/ban", chat.BanHandler(db)) // Alias for ban handler
