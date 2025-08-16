@@ -95,7 +95,7 @@ func main() {
 	http.HandleFunc("/threed", threedata.ThreedDataHandler(threedDB))
 	http.HandleFunc("/gift", gift.GiftDataHandler(giftDB))
 	http.HandleFunc("/addgift/", gift.AddGiftHandler(giftDB))
-
+	http.HandleFunc("/futurepaper/getallpaper/", futurepaper.GetLowPaperHandler)
 	http.HandleFunc("/futurepaper/getallpaper/low", futurepaper.GetLowPaperHandler)
 	http.HandleFunc("/futurepaper/getallpaper/high", futurepaper.GetHighPaperHandler)
 
