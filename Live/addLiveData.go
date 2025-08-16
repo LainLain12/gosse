@@ -2,6 +2,7 @@ package Live
 
 import (
 	"encoding/json"
+	"fmt"
 	"gosse/twoddata"
 	"io/ioutil"
 	"net/http"
@@ -14,6 +15,7 @@ import (
 func AddLiveDataHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		fmt.Println("Method not allowed", r.Method)
 		return
 	}
 	body, err := ioutil.ReadAll(r.Body)
